@@ -18,6 +18,8 @@ export function useServicesBooking() {
     pincode: "",
     date: "",
     timeSlot: "Morning (8:00 AM - 11:30 AM)",
+    approxQuantity: "",
+    quantityUnit: "kg",
     volume: "2-3 bags / items",
     notes: "",
   });
@@ -35,7 +37,12 @@ export function useServicesBooking() {
       timeSlot: bookingData.timeSlot,
       wasteType: selectedService ? selectedService.title : "Household Recyclables",
       category: selectedService ? selectedService.category : "recyclables",
-      volume: bookingData.volume,
+      approxQuantity: bookingData.approxQuantity || "",
+      quantityUnit: bookingData.quantityUnit || "kg",
+      estimatedWeight: bookingData.approxQuantity
+        ? `${bookingData.approxQuantity} ${bookingData.quantityUnit || "kg"}`
+        : bookingData.volume || "Not specified",
+      volume: bookingData.volume || (bookingData.approxQuantity ? `${bookingData.approxQuantity} ${bookingData.quantityUnit || "kg"}` : "Standard volume"),
       notes: bookingData.notes,
     });
 
@@ -55,6 +62,8 @@ export function useServicesBooking() {
       pincode: "",
       date: "",
       timeSlot: "Morning (8:00 AM - 11:30 AM)",
+      approxQuantity: "",
+      quantityUnit: "kg",
       volume: "2-3 bags / items",
       notes: "",
     });

@@ -1,6 +1,7 @@
 // src/pages/home/components/ContactSection.jsx
 
-import { FiAlertTriangle, FiCheckCircle } from "react-icons/fi";
+import React from "react";
+import { FiAlertTriangle, FiCheckCircle, FiTruck } from "react-icons/fi";
 import {
   LuPhone,
   LuMail,
@@ -11,8 +12,25 @@ import {
   LuMessageSquare,
   LuSend,
   LuShieldCheck,
+  LuClock,
+  LuRecycle,
+  LuHeadphones,
 } from "react-icons/lu";
+import SectionHeaderBadge from "../../../common/SectionBadge/SectionHeaderBadge";
 import { footerContact } from "../../../common/Footer/FooterData";
+import CustomDropdown from "../../../common/dropdown/CustomDropdown";
+import contactHeadset from "../../../assets/image/contact_headset.png";
+import contactMap from "../../../assets/image/contact_map.png";
+import contactLeaves from "../../../assets/image/contact_leaves.png";
+import "../style/ContactSection.css";
+
+const subjectOptions = [
+  { value: "general", label: "General Question" },
+  { value: "pickup", label: "Pickup Scheduling Help" },
+  { value: "commercial", label: "Commercial Partnership" },
+  { value: "missed", label: "Report Missed Collection" },
+  { value: "hazardous", label: "Hazardous Disposal" },
+];
 
 export default function ContactSection({ contact }) {
   const {
@@ -27,101 +45,203 @@ export default function ContactSection({ contact }) {
   return (
     <section id="contact" className="contact-section">
       <div className="contact-container">
-        <div className="section-header" style={{ marginBottom: "5rem" }}>
+        {/* Top Section Header with Heading and Label */}
+        <div className="section-header">
+          <SectionHeaderBadge icon={<LuHeadphones />} />
           <span className="section-tag">Get in Touch</span>
-          <h2 className="section-title">We're Here to Help Keep Cities Clean</h2>
+          <h2 className="section-title">
+            We're Here to Help Keep Cities Clean
+          </h2>
           <p className="section-subtitle">
-            Have questions about collection routes, missed pickups, bulk quotes, or recycling audits? 
-            Reach our team directly.
+            Have questions about collection routes, missed pickups, bulk quotes,
+            or recycling audits? Reach our team directly.
           </p>
         </div>
 
-        <div className="contact-layout">
-          {/* Left Column: 4 Distinct Contact Detail & Alert Cards */}
-          <div className="contact-info-panel">
-            {/* 1. Phone Card */}
-            <div className="contact-card">
-              <div className="contact-card-icon" aria-hidden="true">
-                <LuPhone />
+        <div className="contact-dual-grid">
+          {/* ========================================================
+              LEFT CARD: Contact Details, Map & 24/7 Hotline
+             ======================================================== */}
+          <div className="contact-card-main contact-info-card">
+            {/* Header with Title and 3D Headset Illustration */}
+            <div className="contact-card-header">
+              <div className="contact-card-header-left">
+                <div className="contact-card-tag">
+                  <span className="tag-dot" aria-hidden="true" />
+                  <span>CONTACT US</span>
+                </div>
+                <h2 className="contact-main-title">We're Here to Help</h2>
+                <p className="contact-main-desc">
+                  Have a question, need support, or want to partner with us? Our
+                  team is just a message away.
+                </p>
               </div>
-              <div className="contact-card-content">
-                <h3>Phone & Dispatch Helpline</h3>
-                <p>Monday - Saturday · 7:00 AM - 8:00 PM</p>
-                <a href={`tel:${footerContact.phone.replace(/[^\d+]/g, "")}`} className="contact-link-value">
-                  {footerContact.phone}
-                </a>
+
+              <div className="contact-card-header-art" aria-hidden="true">
+                <img
+                  src={contactHeadset}
+                  alt="Customer Support Headset"
+                  className="contact-headset-art"
+                />
               </div>
-              <span className="contact-arrow-badge" aria-hidden="true">
-                <LuChevronRight />
-              </span>
             </div>
 
-            {/* 2. Email Card */}
-            <div className="contact-card">
-              <div className="contact-card-icon" aria-hidden="true">
-                <LuMail />
+            {/* Row 1: Two Quick Contact Channels Side-by-Side */}
+            <div className="contact-channels-grid">
+              {/* Phone & Dispatch */}
+              <div className="contact-channel-card">
+                <div className="channel-icon-wrap" aria-hidden="true">
+                  <LuPhone />
+                </div>
+                <div className="channel-info">
+                  <div className="channel-top">
+                    <h4>Phone & Dispatch</h4>
+                    <span className="channel-badge">Mon - Sat</span>
+                  </div>
+                  <a
+                    href={`tel:${footerContact.phone.replace(/[^\d+]/g, "")}`}
+                    className="channel-link"
+                  >
+                    {footerContact.phone}
+                  </a>
+                  <span className="channel-meta">7:00 AM - 8:00 PM</span>
+                </div>
               </div>
-              <div className="contact-card-content">
-                <h3>Email Inquiries</h3>
-                <p>Typical response under 15 minutes</p>
-                <a href={`mailto:${footerContact.email}`} className="contact-link-value">
-                  {footerContact.email}
-                </a>
+
+              {/* Email Support */}
+              <div className="contact-channel-card">
+                <div className="channel-icon-wrap" aria-hidden="true">
+                  <LuMail />
+                </div>
+                <div className="channel-info">
+                  <div className="channel-top">
+                    <h4>Email Support</h4>
+                    <span className="channel-badge">&lt; 15m reply</span>
+                  </div>
+                  <a
+                    href={`mailto:${footerContact.email}`}
+                    className="channel-link"
+                    title={footerContact.email}
+                  >
+                    {footerContact.email}
+                  </a>
+                  <span className="channel-meta">Online ticketing 24/7</span>
+                </div>
               </div>
-              <span className="contact-arrow-badge" aria-hidden="true">
-                <LuChevronRight />
-              </span>
             </div>
 
-            {/* 3. Depot Location Card */}
-            <div className="contact-card">
-              <div className="contact-card-icon" aria-hidden="true">
-                <LuMapPin />
+            {/* Row 2: Central Recovery & Depot Hub with Visual Map & Facility Timings */}
+            <div className="contact-depot-hub-card">
+              <div className="depot-header">
+                <div
+                  className="channel-icon-wrap depot-icon-wrap"
+                  aria-hidden="true"
+                >
+                  <LuMapPin />
+                </div>
+                <div className="depot-header-info">
+                  <div className="depot-title-row">
+                    <h4>Central Recovery & Depot Hub</h4>
+                    <span className="depot-badge">
+                      <FiTruck
+                        className="depot-badge-icon"
+                        aria-hidden="true"
+                      />
+                      <span>Drop-offs Welcome</span>
+                    </span>
+                  </div>
+                  <span className="depot-address">{footerContact.address}</span>
+                  <span className="depot-type">
+                    Waste Segregation & Materials Transfer Station
+                  </span>
+                </div>
               </div>
-              <div className="contact-card-content">
-                <h3>Central Recovery & Depot Hub</h3>
-                <p>Waste Segregation & Materials Transfer Station</p>
-                <span className="contact-address-value">
-                  {footerContact.address}
-                </span>
+
+              {/* Sub-grid: Map Visual & Timings */}
+              <div className="depot-details-row">
+                <div className="depot-map-box">
+                  <img
+                    src={contactMap}
+                    alt="GreenCycle Eco-Park Location Map"
+                    className="depot-map-img"
+                  />
+                </div>
+
+                <div className="depot-timings-box">
+                  <div className="timings-title">
+                    <LuClock className="timings-icon" aria-hidden="true" />
+                    <span>Facility Timings</span>
+                  </div>
+                  <div className="timings-content">
+                    <p className="timings-open">Mon - Sat: 7:00 AM - 8:00 PM</p>
+                    <p className="timings-closed">Sunday: Closed</p>
+                  </div>
+                  <div className="timings-deco-leaf" aria-hidden="true">
+                    <LuRecycle />
+                  </div>
+                </div>
               </div>
-              <span className="contact-arrow-badge" aria-hidden="true">
-                <LuChevronRight />
-              </span>
             </div>
 
-            {/* 4. Emergency Spill Alert Card */}
-            <div className="emergency-notice-card">
-              <div className="emergency-icon-badge" aria-hidden="true">
+            {/* Row 3: Emergency / Hazardous Spill Alert Card */}
+            <div className="emergency-alert-card">
+              <div className="emergency-alert-icon" aria-hidden="true">
                 <FiAlertTriangle />
               </div>
-              <div className="emergency-content">
-                <h4>Emergency or Hazardous Spill?</h4>
+              <div className="emergency-alert-content">
+                <h5>Emergency or Hazardous Spill?</h5>
                 <p>
-                  Call <strong>1800-GREENCYCLE</strong> for immediate 24/7 dispatch.
+                  Call <strong>1800-GREENCYCLE</strong> for immediate 24/7
+                  priority dispatch.
                 </p>
+              </div>
+              <div className="emergency-arrow" aria-hidden="true">
+                <LuChevronRight />
               </div>
             </div>
           </div>
 
-          {/* Right Column: Clean Form Card */}
-          <div className="contact-form-panel">
-            <div className="contact-form-tag">
-              <span className="tag-dot" aria-hidden="true" />
-              <span>CONTACT OUR TEAM</span>
-              <span className="tag-line" aria-hidden="true" />
-            </div>
+          {/* ========================================================
+              RIGHT CARD: Clean Message Form Card
+             ======================================================== */}
+          <div className="contact-card-main contact-form-card">
+            <div className="contact-card-header">
+              <div className="contact-card-header-left">
+                <div className="contact-card-tag">
+                  <span className="tag-dot" aria-hidden="true" />
+                  <span>SEND US A MESSAGE</span>
+                </div>
+                <h2 className="contact-main-title">Get in Touch</h2>
+                <p className="contact-main-desc">
+                  Tell us how we can help and our operations team will get back
+                  to you.
+                </p>
+              </div>
 
-            <h2 className="contact-form-title">Send us a message</h2>
-            <p className="contact-form-subtitle">
-              Tell us how we can help and our operations team will get back to you.
-            </p>
+              <div className="contact-card-header-art" aria-hidden="true">
+                <img
+                  src={contactLeaves}
+                  alt="Decorative Leaves"
+                  className="contact-leaves-art"
+                />
+              </div>
+            </div>
 
             {contactSubmitted ? (
               <div className="contact-submitted-box">
-                <FiCheckCircle style={{ fontSize: "4.5rem", margin: "0 auto 1.4rem", color: "var(--primary)" }} />
-                <h3 style={{ margin: "0 0 0.8rem", fontSize: "2.2rem" }}>Message Dispatched!</h3>
-                <p style={{ margin: 0, fontSize: "1.45rem", lineHeight: 1.6 }}>{contactStatus}</p>
+                <FiCheckCircle
+                  style={{
+                    fontSize: "4.5rem",
+                    margin: "0 auto 1.4rem",
+                    color: "var(--primary)",
+                  }}
+                />
+                <h3 style={{ margin: "0 0 0.8rem", fontSize: "2.2rem" }}>
+                  Message Dispatched!
+                </h3>
+                <p style={{ margin: 0, fontSize: "1.45rem", lineHeight: 1.6 }}>
+                  {contactStatus}
+                </p>
                 <button
                   type="button"
                   className="btn-primary"
@@ -132,30 +252,39 @@ export default function ContactSection({ contact }) {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleContactSubmit} className="contact-form">
-                {/* Full Name */}
-                <div className="form-group">
-                  <label htmlFor="home-contact-name">Full Name</label>
-                  <div className="input-with-icon">
-                    <LuUser className="field-icon" aria-hidden="true" />
-                    <input
-                      id="home-contact-name"
-                      type="text"
-                      required
-                      placeholder="Enter your full name"
-                      value={contactData.name}
-                      onChange={(e) =>
-                        setContactData({ ...contactData, name: e.target.value })
-                      }
-                    />
+              <form
+                onSubmit={handleContactSubmit}
+                className="contact-form-flow"
+              >
+                {/* Row 1: Full Name & Email Address */}
+                <div className="contact-form-row">
+                  <div className="contact-form-field">
+                    <label htmlFor="home-contact-name">
+                      Full Name <span className="req-star">*</span>
+                    </label>
+                    <div className="contact-input-wrap">
+                      <LuUser className="field-icon" aria-hidden="true" />
+                      <input
+                        id="home-contact-name"
+                        type="text"
+                        required
+                        placeholder="Enter your full name"
+                        value={contactData.name}
+                        onChange={(e) =>
+                          setContactData({
+                            ...contactData,
+                            name: e.target.value,
+                          })
+                        }
+                      />
+                    </div>
                   </div>
-                </div>
 
-                {/* Email & Phone Row */}
-                <div className="form-row">
-                  <div className="form-group">
-                    <label htmlFor="home-contact-email">Email Address</label>
-                    <div className="input-with-icon">
+                  <div className="contact-form-field">
+                    <label htmlFor="home-contact-email">
+                      Email Address <span className="req-star">*</span>
+                    </label>
+                    <div className="contact-input-wrap">
                       <LuMail className="field-icon" aria-hidden="true" />
                       <input
                         id="home-contact-email"
@@ -164,15 +293,23 @@ export default function ContactSection({ contact }) {
                         placeholder="you@example.com"
                         value={contactData.email}
                         onChange={(e) =>
-                          setContactData({ ...contactData, email: e.target.value })
+                          setContactData({
+                            ...contactData,
+                            email: e.target.value,
+                          })
                         }
                       />
                     </div>
                   </div>
+                </div>
 
-                  <div className="form-group">
-                    <label htmlFor="home-contact-phone">Phone Number</label>
-                    <div className="input-with-icon">
+                {/* Row 2: Phone Number & Area/Pincode */}
+                <div className="contact-form-row">
+                  <div className="contact-form-field">
+                    <label htmlFor="home-contact-phone">
+                      Phone Number <span className="req-star">*</span>
+                    </label>
+                    <div className="contact-input-wrap">
                       <LuPhone className="field-icon" aria-hidden="true" />
                       <input
                         id="home-contact-phone"
@@ -181,83 +318,97 @@ export default function ContactSection({ contact }) {
                         placeholder="+91 98765 43210"
                         value={contactData.phone}
                         onChange={(e) =>
-                          setContactData({ ...contactData, phone: e.target.value })
+                          setContactData({
+                            ...contactData,
+                            phone: e.target.value,
+                          })
                         }
                       />
                     </div>
                   </div>
-                </div>
 
-                {/* Inquiry Subject & Area Pincode Row */}
-                <div className="form-row">
-                  <div className="form-group">
-                    <label htmlFor="home-contact-category">Inquiry Subject</label>
-                    <div className="input-with-icon">
-                      <LuFileText className="field-icon" aria-hidden="true" />
-                      <select
-                        id="home-contact-category"
-                        value={contactData.category}
-                        onChange={(e) =>
-                          setContactData({ ...contactData, category: e.target.value })
-                        }
-                      >
-                        <option value="general">General Question</option>
-                        <option value="pickup">Pickup Scheduling Help</option>
-                        <option value="commercial">Commercial Partnership</option>
-                        <option value="missed">Report Missed Collection</option>
-                        <option value="hazardous">Hazardous Disposal</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="form-group">
+                  <div className="contact-form-field">
                     <label htmlFor="home-contact-pin">Area / Pincode</label>
-                    <div className="input-with-icon">
+                    <div className="contact-input-wrap">
                       <LuMapPin className="field-icon" aria-hidden="true" />
                       <input
                         id="home-contact-pin"
                         type="text"
-                        placeholder="e.g. Sector 12"
+                        placeholder="e.g. Sector 12 or 110001"
                         value={contactData.pincode}
                         onChange={(e) =>
-                          setContactData({ ...contactData, pincode: e.target.value })
+                          setContactData({
+                            ...contactData,
+                            pincode: e.target.value,
+                          })
                         }
                       />
                     </div>
                   </div>
                 </div>
 
-                {/* Message Field */}
-                <div className="form-group">
-                  <label htmlFor="home-contact-message">Your Message</label>
-                  <div className="textarea-with-icon">
-                    <LuMessageSquare className="field-icon-textarea" aria-hidden="true" />
+                {/* Row 3: Inquiry Subject */}
+                <div className="contact-form-field">
+                  <label htmlFor="home-contact-category">
+                    Inquiry Subject <span className="req-star">*</span>
+                  </label>
+                  <CustomDropdown
+                    id="home-contact-category"
+                    options={subjectOptions}
+                    value={contactData.category}
+                    onChange={(e) =>
+                      setContactData({
+                        ...contactData,
+                        category: e.target.value,
+                      })
+                    }
+                    icon={<LuFileText />}
+                    placeholder="Select a subject"
+                    ariaLabel="Inquiry Subject"
+                  />
+                </div>
+
+                {/* Row 4: Your Message */}
+                <div className="contact-form-field">
+                  <label htmlFor="home-contact-message">
+                    Your Message <span className="req-star">*</span>
+                  </label>
+                  <div className="contact-textarea-wrap">
+                    <LuMessageSquare
+                      className="field-icon textarea-icon"
+                      aria-hidden="true"
+                    />
                     <textarea
                       id="home-contact-message"
                       required
+                      maxLength={500}
                       placeholder="Describe your inquiry, waste volume, or location details..."
                       value={contactData.message}
                       onChange={(e) =>
-                        setContactData({ ...contactData, message: e.target.value })
+                        setContactData({
+                          ...contactData,
+                          message: e.target.value,
+                        })
                       }
                     />
+                    <span className="char-counter">
+                      {(contactData.message || "").length}/500
+                    </span>
                   </div>
                 </div>
 
                 {contactStatus && !contactSubmitted && (
-                  <p className="contact-error-text">
-                    {contactStatus}
-                  </p>
+                  <p className="contact-error-text">{contactStatus}</p>
                 )}
 
-                {/* Send Button */}
-                <button type="submit" className="btn-send-inquiry">
-                  <LuSend aria-hidden="true" />
+                {/* Submit Button */}
+                <button type="submit" className="btn-send-inquiry-primary">
+                  <LuSend className="send-icon" aria-hidden="true" />
                   <span>Send Inquiry</span>
                 </button>
 
-                {/* Trust Badge */}
-                <div className="contact-trust-badge">
+                {/* Privacy Trust Badge */}
+                <div className="contact-trust-pill">
                   <LuShieldCheck className="trust-icon" aria-hidden="true" />
                   <span>Your information stays private.</span>
                 </div>

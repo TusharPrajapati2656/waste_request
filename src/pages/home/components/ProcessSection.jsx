@@ -1,39 +1,63 @@
 // src/pages/home/components/ProcessSection.jsx
 
+import React from "react";
+import { LuChevronRight, LuRoute } from "react-icons/lu";
+import SectionHeaderBadge from "../../../common/SectionBadge/SectionHeaderBadge";
+import { processSteps } from "../data/homeData";
+import processStep1 from "../../../assets/image/process_step_1.png";
+import processStep2 from "../../../assets/image/process_step_2.png";
+import processStep3 from "../../../assets/image/process_step_3.png";
+import "../style/ProcessSection.css";
+
+const stepImages = [processStep1, processStep2, processStep3];
+
 export default function ProcessSection() {
   return (
-    <section className="section-wrapper">
-      <div className="section-header">
-        <span className="section-tag">Simple Process</span>
-        <h2 className="section-title">How GreenCycle Works in 3 Steps</h2>
-        <p className="section-subtitle">
-          From booking your pickup to seeing your environmental impact score, we make waste management frictionless.
-        </p>
-      </div>
+    <section className="process-section" id="process">
+      {/* Decorative ambient leaf accents */}
+      <div className="process-bg-leaf leaf-top-right" aria-hidden="true" />
+      <div className="process-bg-leaf leaf-top-left" aria-hidden="true" />
 
-      <div className="process-grid">
-        <div className="process-step">
-          <span className="step-badge">1</span>
-          <h3>1. Book Your Window</h3>
-          <p>
-            Select your waste category and choose a pickup date & time that suits your schedule. Upload photos if you have bulk items.
+      <div className="section-wrapper">
+        <div className="section-header">
+          <SectionHeaderBadge icon={<LuRoute />} />
+          <span className="section-tag">Simple Process</span>
+          <h2 className="section-title">How GreenCycle Works in 3 Steps</h2>
+          <p className="section-subtitle">
+            From booking your pickup to seeing your environmental impact score,
+            we make waste management frictionless.
           </p>
         </div>
 
-        <div className="process-step">
-          <span className="step-badge">2</span>
-          <h3>2. Doorstep Collection</h3>
-          <p>
-            Our background-verified drivers arrive with electric collection vans, weigh the waste digitally, and give you an instant receipt.
-          </p>
-        </div>
+        <div className="process-flow">
+          {processSteps.map((step, idx) => (
+            <React.Fragment key={step.step}>
+              <div className="process-card-item">
+                <div className="process-visual-container">
+                  <img
+                    src={stepImages[idx]}
+                    alt={step.title}
+                    className="process-step-img"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="process-card-content">
+                  <h3 className="process-card-title">{step.title}</h3>
+                  <p className="process-card-desc">{step.description}</p>
+                </div>
+              </div>
 
-        <div className="process-step">
-          <span className="step-badge">3</span>
-          <h3>3. Certified Recycling</h3>
-          <p>
-            Materials are transported to local recycling and composting plants, diverting 90%+ waste away from polluting landfills.
-          </p>
+              {idx < processSteps.length - 1 && (
+                <div className="process-connector" aria-hidden="true">
+                  <div className="connector-line start-line" />
+                  <div className="connector-pill">
+                    <LuChevronRight className="connector-icon" />
+                  </div>
+                  <div className="connector-line end-line" />
+                </div>
+              )}
+            </React.Fragment>
+          ))}
         </div>
       </div>
     </section>

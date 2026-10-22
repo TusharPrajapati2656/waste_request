@@ -14,7 +14,8 @@
 }
 
 .header-container {
-  width: min(calc(100% - var(--space-8)), var(--container-width));
+  width: min(calc(100% - var(--container-inline-gutter)), var(--container-width));
+  max-width: var(--container-max-width);
   min-height: var(--header-height);
   margin-inline: auto;
   display: flex;

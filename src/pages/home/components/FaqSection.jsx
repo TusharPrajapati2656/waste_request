@@ -8,6 +8,8 @@ import {
   LuLeaf,
   LuCircleHelp,
 } from "react-icons/lu";
+import SectionHeaderBadge from "../../../common/SectionBadge/SectionHeaderBadge";
+import "../style/FaqSection.css";
 
 export default function FaqSection({ faq, onScrollTo }) {
   const {
@@ -17,28 +19,34 @@ export default function FaqSection({ faq, onScrollTo }) {
     setFaqSearchQuery,
     openFaqIds,
     toggleFaq,
+    isFaqExpanded,
+    toggleFaqExpand,
     filteredFaqs,
   } = faq;
+
+  const displayedFaqs =
+    isFaqExpanded || filteredFaqs.length <= 4
+      ? filteredFaqs
+      : filteredFaqs.slice(0, 4);
+
+  const handleToggleExpand = () => {
+    if (isFaqExpanded) {
+      const el = document.getElementById("faq");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+    toggleFaqExpand();
+  };
 
   return (
     <section id="faq" className="faq-section">
       <div className="faq-container">
         {/* Top Centered 3D Glossy Icon Badge */}
         <div className="faq-header-center">
-          <div className="faq-top-badge" aria-hidden="true">
-            <span className="faq-badge-leaf leaf-top-left">
-              <LuLeaf />
-            </span>
-            <span className="faq-badge-leaf leaf-top-right">
-              <LuLeaf />
-            </span>
-            <span className="faq-badge-leaf leaf-bottom-right">
-              <LuLeaf />
-            </span>
-            <div className="faq-top-badge-box">
-              <LuRecycle />
-            </div>
-          </div>
+          <SectionHeaderBadge icon={<LuCircleHelp />} />
+
+          <span className="section-tag">Knowledge Base & FAQ</span>
 
           <h2 className="faq-title">Frequently Asked Questions</h2>
           <p className="faq-subtitle">
@@ -98,7 +106,9 @@ export default function FaqSection({ faq, onScrollTo }) {
         </div>
 
         {/* FAQ Accordion List */}
-        <div className="faq-accordion-list">
+        <div
+          className={`faq-accordion-list ${!isFaqExpanded && filteredFaqs.length > 4 ? "is-capped" : ""}`}
+        >
           {filteredFaqs.length === 0 ? (
             <div className="faq-empty-state">
               <LuCircleHelp
@@ -123,7 +133,7 @@ export default function FaqSection({ faq, onScrollTo }) {
               </button>
             </div>
           ) : (
-            filteredFaqs.map((faqItem) => {
+            displayedFaqs.map((faqItem) => {
               const isOpen = openFaqIds.includes(faqItem.id);
               return (
                 <div
@@ -162,6 +172,27 @@ export default function FaqSection({ faq, onScrollTo }) {
             })
           )}
         </div>
+
+        {/* View More / Show Less Toggle Button */}
+        {filteredFaqs.length > 4 && (
+          <div className="faq-expand-wrapper">
+            <button
+              type="button"
+              className={`faq-expand-btn ${isFaqExpanded ? "is-expanded" : ""}`}
+              onClick={handleToggleExpand}
+              aria-expanded={isFaqExpanded}
+            >
+              <span>
+                {isFaqExpanded
+                  ? "Show Fewer Questions"
+                  : `View All Questions (${filteredFaqs.length})`}
+              </span>
+              <span className="faq-expand-icon-circle">
+                {isFaqExpanded ? <LuChevronUp /> : <LuChevronDown />}
+              </span>
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

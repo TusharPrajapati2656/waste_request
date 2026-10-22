@@ -11,6 +11,11 @@ import {
   FiCheckCircle,
 } from "react-icons/fi";
 import { LuLeaf } from "react-icons/lu";
+import {
+  FaInstagram,
+  FaFacebookF,
+  FaLinkedinIn,
+} from "react-icons/fa6";
 
 import {
   footerNavigation,
@@ -21,6 +26,12 @@ import {
 } from "./FooterData";
 
 import "./Footer.css";
+
+const SOCIAL_ICONS = {
+  instagram: <FaInstagram aria-hidden="true" />,
+  facebook: <FaFacebookF aria-hidden="true" />,
+  linkedin: <FaLinkedinIn aria-hidden="true" />,
+};
 
 const currentYear = new Date().getFullYear();
 
@@ -79,18 +90,24 @@ export default function Footer() {
             </p>
 
             <div className="footer-social-links" aria-label="Social media">
-              {footerSocialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
-                >
-                  {social.label}
-                  <FiArrowUpRight aria-hidden="true" />
-                </a>
-              ))}
+              {footerSocialLinks.map((social) => {
+                const icon =
+                  SOCIAL_ICONS[social.id] ||
+                  SOCIAL_ICONS[social.label.toLowerCase()];
+                return (
+                  <a
+                    key={social.label}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Follow us on ${social.label}`}
+                    title={social.label}
+                    className="footer-social-icon-btn"
+                  >
+                    {icon}
+                  </a>
+                );
+              })}
             </div>
           </div>
 

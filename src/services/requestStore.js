@@ -67,6 +67,8 @@ export const INITIAL_REQUESTS = [
     landmark: "Opposite Community Park",
     wasteType: "Household Recyclables",
     category: "recyclables",
+    approxQuantity: "12",
+    quantityUnit: "kg",
     volume: "3 bags cardboard & crushed plastic bottles",
     estimatedWeight: "12 kg",
     date: "2026-10-22",
@@ -95,6 +97,8 @@ export const INITIAL_REQUESTS = [
     landmark: "Near Mother Dairy booth",
     wasteType: "On-Demand Bulk Waste",
     category: "bulk",
+    approxQuantity: "45",
+    quantityUnit: "kg",
     volume: "1 Queen Size Mattress, 1 Wooden Coffee Table",
     estimatedWeight: "45 kg",
     date: "2026-10-23",
@@ -121,6 +125,8 @@ export const INITIAL_REQUESTS = [
     landmark: "Tower 2 Service Gate",
     wasteType: "E-Waste & Electronics",
     category: "ewaste",
+    approxQuantity: "15",
+    quantityUnit: "kg",
     volume: "4 Broken Laptops, 8 Lithium Batteries, Mixed Cables",
     estimatedWeight: "15 kg",
     date: "2026-10-20",
@@ -151,6 +157,8 @@ export const INITIAL_REQUESTS = [
     landmark: "Near Sector 9 Metro Gate 2",
     wasteType: "Organic / Kitchen Waste",
     category: "organic",
+    approxQuantity: "8",
+    quantityUnit: "kg",
     volume: "2 Compostable Bins Food Scraps",
     estimatedWeight: "8 kg",
     date: "2026-10-22",
@@ -199,6 +207,10 @@ export const requestStore = {
       minute: "2-digit",
     });
 
+    const qtyUnit = data.quantityUnit || "kg";
+    const approxQty = data.approxQuantity || "";
+    const estWeight = data.estimatedWeight || (approxQty ? `${approxQty} ${qtyUnit}` : "Not specified");
+
     const newRequest = {
       id,
       name: data.name,
@@ -209,8 +221,10 @@ export const requestStore = {
       landmark: data.landmark || "",
       wasteType: data.wasteType || "Household Recyclables",
       category: data.category || "recyclables",
-      volume: data.volume || "Standard bin / bag",
-      estimatedWeight: data.estimatedWeight || "Not specified",
+      approxQuantity: approxQty,
+      quantityUnit: qtyUnit,
+      volume: data.volume || (approxQty ? `${approxQty} ${qtyUnit} sorted waste` : "Standard bin / bag"),
+      estimatedWeight: estWeight,
       date: data.date,
       timeSlot: data.timeSlot || "Morning (8:00 AM - 11:30 AM)",
       notes: data.notes || "",

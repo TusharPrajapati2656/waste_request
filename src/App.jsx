@@ -7,6 +7,7 @@ import Footer from "./common/Footer/Footer";
 import Home from "./pages/home/Home";
 import TrackRequests from "./pages/track/TrackRequests";
 import OrganizerDashboard from "./pages/organizer/OrganizerDashboard";
+import AdminApp from "./pages/admin/AdminApp";
 import Legal from "./pages/Legal";
 
 function ScrollToTop() {
@@ -27,6 +28,22 @@ function ScrollToTop() {
 }
 
 const App = () => {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith("/admin");
+
+  // Admin portal is completely isolated with its own layout, sidebar, topbar & auth
+  if (isAdminRoute) {
+    return (
+      <>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/admin/*" element={<AdminApp />} />
+          <Route path="/admin" element={<AdminApp />} />
+        </Routes>
+      </>
+    );
+  }
+
   return (
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       <ScrollToTop />

@@ -6,12 +6,18 @@ import { faqData } from "../data/homeData";
 export function useFaq() {
   const [activeFaqCategory, setActiveFaqCategory] = useState("all");
   const [faqSearchQuery, setFaqSearchQuery] = useState("");
-  const [openFaqIds, setOpenFaqIds] = useState([1]);
+  const [openFaqIds, setOpenFaqIds] = useState([]);
+
+  const [isFaqExpanded, setIsFaqExpanded] = useState(false);
 
   const toggleFaq = (id) => {
     setOpenFaqIds((prev) =>
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
     );
+  };
+
+  const toggleFaqExpand = () => {
+    setIsFaqExpanded((prev) => !prev);
   };
 
   const filteredFaqs = faqData.filter((item) => {
@@ -30,6 +36,9 @@ export function useFaq() {
     setFaqSearchQuery,
     openFaqIds,
     toggleFaq,
+    isFaqExpanded,
+    setIsFaqExpanded,
+    toggleFaqExpand,
     filteredFaqs,
   };
 }

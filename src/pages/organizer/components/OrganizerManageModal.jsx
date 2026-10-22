@@ -1,7 +1,16 @@
-// src/pages/organizer/components/OrganizerManageModal.jsx
-
 import { FiX } from "react-icons/fi";
+import CustomDropdown from "../../../common/dropdown/CustomDropdown";
 import { PRESET_DRIVERS } from "../data/organizerData";
+
+const statusLifecycleOptions = [
+  { value: "submitted", label: "1. Request Submitted (Pending review)" },
+  { value: "confirmed", label: "2. Confirmed (Approved slot)" },
+  { value: "assigned", label: "3. Driver Assigned" },
+  { value: "in_transit", label: "4. Out for Collection (En route)" },
+  { value: "collected", label: "5. Collected & Weighed at Doorstep" },
+  { value: "completed", label: "6. Recycled & Certified (Closed)" },
+  { value: "cancelled", label: "Cancelled" },
+];
 
 export default function OrganizerManageModal({
   activeRequest,
@@ -48,32 +57,31 @@ export default function OrganizerManageModal({
             fontSize: "1.4rem",
           }}
         >
-          Citizen: <strong>{activeRequest.name}</strong> • {activeRequest.wasteType}
+          Citizen: <strong>{activeRequest.name}</strong> • {activeRequest.wasteType} • Est: <strong>{activeRequest.estimatedWeight}</strong> • Slot: <strong>{activeRequest.timeSlot}</strong>
         </p>
 
         <form onSubmit={onSubmit} className="booking-form">
           <div className="form-group">
             <label htmlFor="edit-status">Update Lifecycle Status *</label>
-            <select
+            <CustomDropdown
               id="edit-status"
+              options={statusLifecycleOptions}
               value={editStatus}
               onChange={(e) => setEditStatus(e.target.value)}
-              required
-            >
-              <option value="submitted">1. Request Submitted (Pending review)</option>
-              <option value="confirmed">2. Confirmed (Approved slot)</option>
-              <option value="assigned">3. Driver Assigned</option>
-              <option value="in_transit">4. Out for Collection (En route)</option>
-              <option value="collected">5. Collected & Weighed at Doorstep</option>
-              <option value="completed">6. Recycled & Certified (Closed)</option>
-              <option value="cancelled">Cancelled</option>
-            </select>
+              ariaLabel="Update Lifecycle Status"
+            />
           </div>
 
           <div className="form-group">
             <label htmlFor="preset-driver">Assign Collection Crew / Vehicle</label>
-            <select
+            <CustomDropdown
               id="preset-driver"
+              options={PRESET_DRIVERS.map((d) => ({
+                value: d.name,
+                label: d.name,
+                description: d.phone,
+              }))}
+              value={editDriver}
               onChange={(e) => {
                 const found = PRESET_DRIVERS.find((d) => d.name === e.target.value);
                 if (found) {
@@ -81,17 +89,9 @@ export default function OrganizerManageModal({
                   setEditDriverPhone(found.phone);
                 }
               }}
-              defaultValue=""
-            >
-              <option value="" disabled>
-                -- Select verified driver --
-              </option>
-              {PRESET_DRIVERS.map((d) => (
-                <option key={d.name} value={d.name}>
-                  {d.name} ({d.phone})
-                </option>
-              ))}
-            </select>
+              placeholder="-- Select verified driver --"
+              ariaLabel="Assign Collection Crew"
+            />
           </div>
 
           <div className="form-row">

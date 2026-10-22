@@ -1,0 +1,589 @@
+/* src/pages/home/style/HeroSection.css */
+
+/* ==========================================================================
+   Hero Section Base & Container
+   ========================================================================== */
+.hero-section {
+  position: relative;
+  min-height: calc(100vh - var(--header-height));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #f8fbf8 url("../../../assets/image/landing_background.png") no-repeat center bottom / cover;
+  padding: clamp(4.5rem, 5.5vw, 6rem) 0 clamp(6rem, 7vw, 8rem);
+  border-bottom: 0.1rem solid var(--border);
+  overflow: visible;
+}
+
+.hero-container {
+  width: min(calc(100% - var(--container-inline-gutter)), var(--container-width));
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* ==========================================================================
+   Top Centered Header
+   ========================================================================== */
+.hero-header-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.hero-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.65rem 1.8rem;
+  background: #dcfce7;
+  border: 0.12rem solid #bbf7d0;
+  border-radius: 9999px;
+  color: #065f46;
+  font-size: 1.35rem;
+  font-weight: 700;
+  box-shadow: 0 0.2rem 0.8rem rgba(5, 150, 105, 0.08);
+}
+
+.hero-badge-leaf {
+  font-size: 1.65rem;
+  color: #059669;
+}
+
+.hero-title {
+  font-size: clamp(3rem, 3.6vw, 4.4rem);
+  font-weight: 800;
+  line-height: 1.18;
+  color: #0f172a;
+  letter-spacing: -0.025em;
+  margin: 1.4rem 0 0.8rem;
+}
+
+.hero-title-accent {
+  color: #059669;
+}
+
+.hero-subtitle {
+  font-size: 1.65rem;
+  color: #475569;
+  font-weight: 500;
+  margin: 0;
+  max-width: 65rem;
+}
+
+/* ==========================================================================
+   Central Floating Form Card
+   ========================================================================== */
+.hero-main-card {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 2.4rem;
+  border: 0.12rem solid #dcf0e2;
+  box-shadow: 0 1.6rem 4.5rem -0.8rem rgba(16, 121, 75, 0.12),
+              0 0.4rem 1.6rem rgba(0, 0, 0, 0.03);
+  padding: 2.4rem 2.8rem 2.4rem;
+  position: relative;
+  z-index: 5;
+  overflow: visible;
+}
+
+.hero-estimate-form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Row 1: 4 Inputs + CTA Button */
+.hero-form-row-main {
+  display: grid;
+  grid-template-columns: 1.25fr 0.95fr 1.35fr 0.95fr 1.25fr;
+  gap: 1.4rem;
+  align-items: flex-end;
+}
+
+.hero-field-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.hero-field-col.category-col {
+  position: relative;
+  z-index: 25;
+}
+
+.hero-field-label {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.8rem;
+  display: block;
+  white-space: nowrap;
+}
+
+.req-asterisk {
+  color: #ef4444;
+  margin-left: 0.2rem;
+}
+
+/* Field Inputs Shared Style */
+.hero-input-box {
+  height: 5.6rem;
+  border: 0.14rem solid #dce6de;
+  border-radius: 1.4rem;
+  padding: 0 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #ffffff;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.hero-input-box:hover {
+  border-color: #10b981;
+}
+
+.hero-input-box:focus-within {
+  border-color: #10b981;
+  box-shadow: 0 0 0 0.35rem rgba(16, 185, 129, 0.12);
+}
+
+.hero-field-icon-badge {
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 1rem;
+  background: #e8f5e9;
+  color: #16794b;
+  display: grid;
+  place-items: center;
+  font-size: 1.85rem;
+  flex-shrink: 0;
+}
+
+.hero-native-input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 1.35rem;
+  color: #0f172a;
+  font-weight: 500;
+  font-family: inherit;
+}
+
+.hero-native-input::placeholder {
+  color: #94a3b8;
+  font-weight: 400;
+}
+
+/* Date Box Special Treatment */
+.hero-date-box {
+  cursor: pointer;
+  user-select: none;
+}
+
+.hero-date-display {
+  flex: 1;
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: #0f172a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hero-date-display.is-placeholder {
+  color: #94a3b8;
+  font-weight: 400;
+}
+
+.hero-hidden-date-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.hero-date-chevron {
+  font-size: 1.8rem;
+  color: #64748b;
+  flex-shrink: 0;
+}
+
+/* Quantity input with unit dropdown */
+.hero-qty-input-box {
+  padding-right: 0.3rem;
+}
+
+.hero-qty-number {
+  min-width: 5.5rem;
+}
+
+.hero-unit-selector {
+  display: flex;
+  align-items: center;
+  border-left: 0.12rem solid #e2e8f0;
+  padding-left: 0.2rem;
+  margin-left: 0.2rem;
+  height: 3.6rem;
+  width: 8.2rem;
+  flex-shrink: 0;
+}
+
+/* CTA Button ("Calculate Estimate & Check Availability") */
+.hero-btn-calculate {
+  height: 5.6rem;
+  width: 100%;
+  border-radius: 1.4rem;
+  background: #007a4d;
+  border: none;
+  color: #ffffff;
+  padding: 0 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  cursor: pointer;
+  box-shadow: 0 0.8rem 2rem rgba(0, 122, 77, 0.28);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+}
+
+.hero-btn-calculate:hover {
+  background: #006640;
+  transform: translateY(-0.15rem);
+  box-shadow: 0 1rem 2.5rem rgba(0, 122, 77, 0.38);
+}
+
+.hero-btn-calculate:active {
+  transform: translateY(0);
+}
+
+.hero-btn-icon-left {
+  font-size: 2.2rem;
+  flex-shrink: 0;
+}
+
+.hero-btn-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  line-height: 1.25;
+}
+
+.hero-btn-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+}
+
+.hero-btn-sub {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.hero-btn-icon-right {
+  font-size: 1.9rem;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Row 2: Pickup Time Slot Bar
+   ========================================================================== */
+.hero-slot-bar {
+  background: #f4faf6;
+  border: 0.12rem solid #dcf0e2;
+  border-radius: 1.8rem;
+  padding: 1.2rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: 1.8rem;
+}
+
+.hero-slot-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+}
+
+.hero-slot-clock-badge {
+  width: 4.2rem;
+  height: 4.2rem;
+  border-radius: 9999px;
+  background: #e0f2e9;
+  color: #16794b;
+  display: grid;
+  place-items: center;
+  font-size: 2.1rem;
+  flex-shrink: 0;
+}
+
+.hero-slot-bar-title {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #1e293b;
+  display: block;
+}
+
+.hero-slot-bar-desc {
+  font-size: 1.25rem;
+  color: #64748b;
+  font-weight: 500;
+  margin: 0.2rem 0 0;
+}
+
+/* Time Slot Pills */
+.hero-slot-pills-group {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.hero-slot-pill {
+  background: #ffffff;
+  border: 0.12rem solid #e2e8f0;
+  border-radius: 1.4rem;
+  padding: 0.8rem 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+  font-family: inherit;
+}
+
+.hero-slot-pill:hover {
+  border-color: #10b981;
+  transform: translateY(-0.1rem);
+}
+
+.hero-slot-pill.is-selected {
+  border-color: #10b981;
+  background: #ffffff;
+  box-shadow: 0 0.4rem 1.4rem rgba(16, 185, 129, 0.18);
+  outline: 0.08rem solid #10b981;
+}
+
+.sun-icon {
+  font-size: 2.3rem;
+  color: #f59e0b;
+  flex-shrink: 0;
+}
+
+.moon-icon {
+  font-size: 2.1rem;
+  color: #334155;
+  flex-shrink: 0;
+}
+
+.hero-slot-pill-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.hero-slot-pill-name {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.2;
+}
+
+.hero-slot-pill-time {
+  font-size: 1.15rem;
+  color: #64748b;
+  font-weight: 500;
+  margin-top: 0.15rem;
+}
+
+/* ==========================================================================
+   Estimate Calculation Result Drawer
+   ========================================================================== */
+.hero-estimate-result-drawer {
+  margin-top: 1.8rem;
+  padding: 2rem 2.2rem;
+  background: #ffffff;
+  border: 0.14rem solid #dcf0e2;
+  border-radius: 1.8rem;
+  box-shadow: 0 0.8rem 2.4rem rgba(16, 121, 75, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  animation: slideDownFade 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideDownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-result-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+  flex-wrap: wrap;
+  padding-bottom: 1.2rem;
+  border-bottom: 0.1rem solid #eef4f0;
+}
+
+.hero-result-rate {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+}
+
+.hero-result-rate-label {
+  font-size: 1.35rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.hero-result-rate-value {
+  font-size: 2.2rem;
+  color: #059669;
+  font-weight: 800;
+}
+
+.hero-result-badge-available {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 1.2rem;
+  background: #dcfce7;
+  color: #065f46;
+  border-radius: 9999px;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.hero-result-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.4rem;
+}
+
+.hero-metric-box {
+  background: #f8faf9;
+  border: 0.1rem solid #e8f0eb;
+  border-radius: 1.2rem;
+  padding: 1rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.hero-metric-label {
+  font-size: 1.15rem;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.hero-metric-val {
+  font-size: 1.45rem;
+  color: #1e293b;
+  font-weight: 700;
+}
+
+.hero-metric-val.text-green {
+  color: #059669;
+}
+
+.hero-btn-confirm-reserve {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.4rem 2.4rem;
+  background: #007a4d;
+  color: #ffffff;
+  border: none;
+  border-radius: 1.4rem;
+  font-size: 1.45rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0.4rem 1.4rem rgba(0, 122, 77, 0.25);
+}
+
+.hero-btn-confirm-reserve:hover {
+  background: #006640;
+  transform: translateY(-0.15rem);
+  box-shadow: 0 0.8rem 2rem rgba(0, 122, 77, 0.35);
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+@media (max-width: 1200px) {
+  .hero-form-row-main {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .btn-col {
+    grid-column: span 2;
+  }
+
+  .hero-slot-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.6rem;
+  }
+
+  .hero-slot-pills-group {
+    justify-content: space-between;
+  }
+
+  .hero-result-metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 3rem 1.5rem 4rem;
+  }
+
+  .hero-form-row-main {
+    grid-template-columns: 1fr;
+  }
+
+  .btn-col {
+    grid-column: span 1;
+  }
+
+  .hero-slot-pills-group {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-result-metrics {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,439 @@
+.fsb-calendar-dropdown {
+  width: min(62rem, calc(100vw - 3.2rem));
+  max-width: calc(100vw - 3.2rem);
+  max-height: calc(100vh - 8rem);
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  border-radius: 1.8rem;
+  box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.16);
+}
+
+.fsb-calendar {
+  --color-primary: var(--primary, #16794b);
+  --color-primary-dark: var(--primary-dark, #12633d);
+  --color-white: #ffffff;
+  --ink: #0f172a;
+  --fsb-cal-heading: #0f172a;
+  --fsb-cal-muted: #64748b;
+  --fsb-cal-btn-bg: #eaf7ee;
+  --fsb-cal-today-ring: #16794b;
+  --fsb-cal-footer-border: #e2e8f0;
+  --fsb-cal-footer-text: #475569;
+  --sb-color-text-lighter: #94a3b8;
+  --sb-transition-fast: 0.15s ease;
+  --sb-transition-base: 0.25s ease;
+
+  background: var(--color-white);
+  border-radius: 1.6rem;
+  padding: 2rem;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.fsb-calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.6rem;
+  color: var(--fsb-cal-heading);
+  font-weight: 800;
+}
+
+.fsb-calendar-header span {
+  font-size: 1.6rem;
+  text-transform: capitalize;
+  font-weight: 700;
+  color: #222;
+}
+
+.fsb-calendar-header button {
+  width: 4rem;
+  height: 4rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: #f6f7fb;
+
+  color: var(--color-primary);
+
+  transition: 0.25s;
+
+  cursor: pointer;
+}
+
+.fsb-calendar-header button:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.fsb-calendar-months {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+}
+
+.fsb-calendar-month {
+  width: 100%;
+}
+
+.fsb-calendar-title {
+  margin-bottom: 0.5rem;
+  color: var(--ink);
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.fsb-calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  color: var(--fsb-cal-muted);
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.fsb-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.fsb-calendar-day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.6rem;
+  border: none;
+  border-radius: 0.8rem;
+  background: var(--color-white);
+  color: var(--ink);
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--sb-transition-fast);
+}
+
+.fsb-calendar-day:hover:not(.fsb-disabled):not(.fsb-selected) {
+  background: var(--fsb-cal-btn-bg);
+  color: var(--color-primary);
+}
+
+.fsb-calendar-day.fsb-selected {
+  background: var(--color-primary, #16794b);
+  color: var(--color-white, #ffffff);
+}
+
+.fsb-calendar-day.fsb-range-start {
+  border-top-left-radius: 0.8rem;
+  border-bottom-left-radius: 0.8rem;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.fsb-calendar-day.fsb-range-end {
+  border-top-right-radius: 0.8rem;
+  border-bottom-right-radius: 0.8rem;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.fsb-calendar-day.fsb-range-start.fsb-range-end {
+  border-radius: 0.8rem;
+}
+
+.fsb-calendar-day.fsb-in-range {
+  background: rgba(22, 121, 75, 0.14);
+  color: var(--color-primary, #16794b);
+  border-radius: 0;
+  font-weight: 800;
+}
+
+.fsb-calendar-day.fsb-in-range-hover {
+  background: rgba(22, 121, 75, 0.08);
+  color: var(--color-primary, #16794b);
+  border-radius: 0;
+  font-weight: 700;
+}
+
+.fsb-calendar-day.fsb-today:not(.fsb-selected):not(.fsb-in-range) {
+  color: var(--color-primary);
+  box-shadow: inset 0 0 0 0.1rem var(--fsb-cal-today-ring);
+}
+
+.fsb-calendar-day.fsb-disabled {
+  opacity: 0.4;
+  color: var(--sb-color-text-lighter);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.fsb-calendar-empty {
+  min-height: 3.6rem;
+}
+
+.fsb-calendar-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  padding-top: 1rem;
+  border-top: 0.1rem solid var(--fsb-cal-footer-border);
+  color: var(--fsb-cal-footer-text);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.fsb-calendar-footer button {
+  padding: 0.7rem 1.4rem;
+  border: 0.1rem solid var(--color-primary);
+  border-radius: 1.8rem;
+  background: var(--color-white);
+  color: var(--color-primary);
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--sb-transition-base);
+}
+
+.fsb-calendar-footer button:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* ==========================================
+   Responsive code 
+========================================== */
+@media (max-width: 1200px) {
+  .fsb-calendar-dropdown {
+    width: min(54rem, calc(100vw - 2.4rem));
+    max-height: calc(100vh - 6rem);
+  }
+}
+
+/* ==========================================
+   Tablet Landscape
+========================================== */
+@media (max-width: 992px) {
+  .fsb-calendar-dropdown {
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(34rem, calc(100vw - 2rem));
+  }
+
+  .fsb-calendar-title {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .fsb-calendar-months {
+    grid-template-columns: 1fr;
+  }
+
+  .fsb-calendar-month:nth-child(2) {
+    display: none;
+  }
+
+  .fsb-calendar-header {
+    margin-bottom: 1.2rem;
+  }
+
+  .fsb-calendar-footer {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  .fsb-calendar-footer button {
+    width: 100%;
+  }
+}
+
+/* ==========================================
+   Tablet Portrait
+========================================== */
+@media (max-width: 768px) {
+  .fsb-calendar-dropdown {
+    width: 100%;
+    max-width: 40rem;
+    border-radius: 1.4rem;
+  }
+
+  .fsb-calendar {
+    padding: 1.4rem;
+  }
+
+  .fsb-calendar-header {
+    margin-bottom: 1rem;
+  }
+
+  .fsb-calendar-header span {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  .fsb-calendar-header button {
+    width: 3.6rem;
+    height: 3.6rem;
+  }
+
+  .fsb-calendar-title {
+    font-size: 1.4rem;
+  }
+
+  .fsb-calendar-weekdays {
+    font-size: 1rem;
+  }
+
+  .fsb-calendar-grid {
+    gap: 0.3rem;
+  }
+
+  .fsb-calendar-day,
+  .fsb-calendar-empty {
+    min-height: 3.2rem;
+    font-size: 1.2rem;
+  }
+
+  .fsb-calendar-footer {
+    font-size: 1.1rem;
+  }
+}
+
+/* ==========================================
+   Large Mobile
+========================================== */
+@media (max-width: 576px) {
+  .fsb-calendar {
+    padding: 1.2rem;
+  }
+
+  .fsb-calendar-header span {
+    font-size: 1.3rem;
+  }
+
+  .fsb-calendar-header button {
+    width: 3.4rem;
+    height: 3.4rem;
+  }
+
+  .fsb-calendar-title {
+    font-size: 1.3rem;
+  }
+
+  .fsb-calendar-weekdays {
+    font-size: 0.95rem;
+  }
+
+  .fsb-calendar-grid {
+    gap: 0.25rem;
+  }
+
+  .fsb-calendar-day,
+  .fsb-calendar-empty {
+    min-height: 3rem;
+    font-size: 1.1rem;
+  }
+
+  .fsb-calendar-footer {
+    padding-top: 1rem;
+  }
+
+  .fsb-calendar-footer button {
+    padding: 0.8rem;
+    width: 100%;
+  }
+}
+
+/* ==========================================
+   Small Mobile
+========================================== */
+@media (max-width: 420px) {
+  .fsb-calendar {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .fsb-calendar-header span {
+    font-size: 1.2rem;
+  }
+
+  .fsb-calendar-header button {
+    width: 3.2rem;
+    height: 3.2rem;
+  }
+
+  .fsb-calendar-title {
+    font-size: 1.2rem;
+  }
+
+  .fsb-calendar-weekdays {
+    font-size: 0.9rem;
+  }
+
+  .fsb-calendar-grid {
+    gap: 0.2rem;
+  }
+
+  .fsb-calendar-day,
+  .fsb-calendar-empty {
+    min-height: 2.8rem;
+    font-size: 1rem;
+  }
+
+  .fsb-calendar-footer {
+    gap: 0.8rem;
+    font-size: 1rem;
+  }
+}
+
+/* ==========================================
+   Extra Small Devices
+========================================== */
+@media (max-width: 360px) {
+  .fsb-calendar {
+    padding: 0.8rem;
+  }
+
+  .fsb-calendar-header button {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .fsb-calendar-header span {
+    font-size: 1.1rem;
+  }
+
+  .fsb-calendar-title {
+    font-size: 1.1rem;
+  }
+
+  .fsb-calendar-weekdays {
+    font-size: 0.85rem;
+  }
+
+  .fsb-calendar-day,
+  .fsb-calendar-empty {
+    min-height: 2.6rem;
+    font-size: 0.95rem;
+  }
+
+  .fsb-calendar-footer button {
+    font-size: 1rem;
+  }
+}
+
+.fsb-single-month .fsb-calendar-months {
+  grid-template-columns: 1fr;
+}

@@ -1,0 +1,235 @@
+/* src/pages/home/style/ProcessSection.css */
+
+.process-section {
+  position: relative;
+  background: radial-gradient(ellipse 75% 55% at 50% 32%, #ecfdf3 0%, #f6fcf8 50%, transparent 100%);
+  overflow: hidden;
+}
+
+/* Ambient Leaf Accents matching the mockup */
+.process-bg-leaf {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.55;
+  z-index: 0;
+  transition: opacity 0.3s ease;
+}
+
+.leaf-top-right {
+  top: 3rem;
+  right: 5%;
+  width: 7rem;
+  height: 4.5rem;
+  background: radial-gradient(ellipse at center, rgba(134, 239, 172, 0.4) 0%, rgba(74, 222, 128, 0.15) 60%, transparent 80%);
+  border-radius: 0% 100% 0% 100% / 0% 100% 0% 100%;
+  transform: rotate(35deg);
+  filter: blur(1px);
+}
+
+.leaf-top-left {
+  top: 12rem;
+  left: 3%;
+  width: 5rem;
+  height: 3.5rem;
+  background: radial-gradient(ellipse at center, rgba(167, 243, 208, 0.35) 0%, rgba(110, 231, 183, 0.1) 60%, transparent 80%);
+  border-radius: 100% 0% 100% 0% / 100% 0% 100% 0%;
+  transform: rotate(-25deg);
+  filter: blur(1px);
+}
+
+/* Process Flow Layout */
+.process-flow {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 1.6rem;
+  position: relative;
+  z-index: 1;
+  margin-top: 1rem;
+}
+
+/* Individual Step Item */
+.process-card-item {
+  flex: 1 1 0;
+  max-width: 37rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  transition: transform 0.35s cubic-bezier(0.2, 0, 0.2, 1);
+  cursor: default;
+}
+
+.process-card-item:hover {
+  transform: translateY(-0.8rem);
+}
+
+/* 3D Illustration Container - Fixed uniform height for all steps */
+.process-visual-container {
+  width: 100%;
+  height: 22rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: -1.6rem;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.process-step-img {
+  max-width: 25.5rem;
+  max-height: 20.5rem;
+  width: auto;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 0.8rem 1.6rem rgba(22, 101, 52, 0.08));
+  transition: transform 0.35s cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.process-card-item:hover .process-step-img {
+  transform: scale(1.03);
+}
+
+/* Process Card Body - Equal height with flex 1 */
+.process-card-content {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 19rem;
+  background: #ffffff;
+  border: 0.14rem solid rgba(22, 163, 74, 0.14);
+  border-radius: 2.2rem;
+  padding: 3.6rem 2.6rem 3.2rem;
+  box-shadow: 0 1rem 3rem rgba(15, 60, 30, 0.05), 0 0.2rem 0.6rem rgba(0, 0, 0, 0.02);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.process-card-item:hover .process-card-content {
+  border-color: rgba(22, 163, 74, 0.36);
+  box-shadow: 0 2rem 4.5rem rgba(22, 163, 74, 0.12), 0 0.4rem 1.2rem rgba(0, 0, 0, 0.04);
+}
+
+.process-card-title {
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: #0d2818;
+  margin: 0 0 1.2rem;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+
+.process-card-desc {
+  font-size: 1.45rem;
+  color: #52796f;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Connector Between Steps */
+.process-connector {
+  flex: 0 0 5.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  align-self: flex-start;
+  margin-top: 10.5rem;
+  z-index: 3;
+}
+
+.connector-line {
+  flex: 1;
+  height: 0;
+  border-top: 0.2rem dashed #86efac;
+  transition: border-color 0.3s ease;
+}
+
+.connector-pill {
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 0.18rem solid #16a34a;
+  color: #16a34a;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 0.3rem 0.8rem rgba(22, 163, 74, 0.14);
+  flex-shrink: 0;
+  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.connector-icon {
+  font-size: 1.6rem;
+  stroke-width: 2.5;
+}
+
+.process-connector:hover .connector-pill {
+  transform: scale(1.1);
+  background: #16a34a;
+  color: #ffffff;
+  box-shadow: 0 0.5rem 1.4rem rgba(22, 163, 74, 0.28);
+}
+
+.process-connector:hover .connector-line {
+  border-color: #16a34a;
+}
+
+/* Tablet & Mobile Responsiveness */
+@media (max-width: 960px) {
+  .process-flow {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .process-card-item {
+    max-width: 44rem;
+    width: 100%;
+  }
+
+  .process-connector {
+    flex: none;
+    flex-direction: column;
+    height: 5.2rem;
+    width: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .connector-line {
+    width: 0;
+    height: 100%;
+    border-top: none;
+    border-left: 0.2rem dashed #86efac;
+  }
+
+  .connector-icon {
+    transform: rotate(90deg);
+  }
+}
+
+@media (max-width: 480px) {
+  .process-step-img {
+    max-width: 21rem;
+  }
+
+  .process-card-content {
+    padding: 3rem 1.8rem 2.6rem;
+    border-radius: 1.8rem;
+  }
+
+  .process-card-title {
+    font-size: 1.9rem;
+  }
+
+  .process-card-desc {
+    font-size: 1.35rem;
+  }
+}

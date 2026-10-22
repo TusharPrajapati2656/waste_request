@@ -1,0 +1,650 @@
+/* src/pages/home/style/ContactSection.css */
+
+.contact-section {
+  position: relative;
+  background: #f8fbf9 url("../../../assets/image/contact_background.png") no-repeat center bottom / cover;  overflow: hidden;
+}
+
+/* Scaled container matching unified site standard */
+.contact-container {
+  width: min(calc(100% - var(--container-inline-gutter)), var(--container-width));
+  max-width: var(--container-max-width);
+  margin-inline: auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* 2-Column Dual Grid Layout */
+.contact-dual-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: stretch;
+}
+
+/* Common Elevated Card Base (Scaled to ~90%) */
+.contact-card-main {
+  background: #ffffff;
+  border: 0.12rem solid #e4ede7;
+  border-radius: 2.5rem;
+  padding: 3rem 2.8rem 2.6rem;
+  box-shadow:
+    0 0.9rem 3rem -0.4rem rgba(22, 101, 52, 0.05),
+    0 0.2rem 0.5rem rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  text-align: left;
+}
+
+/* Card Header */
+.contact-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.contact-card-header-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.contact-card-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #16794b;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.7rem;
+}
+
+.tag-dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: #16a34a;
+}
+
+.contact-main-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+
+.contact-main-desc {
+  font-size: 1.38rem;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.48;
+}
+
+/* Header Art Images (90% scaled) */
+.contact-card-header-art {
+  flex-shrink: 0;
+}
+
+.contact-headset-art {
+  width: 9.5rem;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin-top: -0.7rem;
+  margin-right: -0.5rem;
+}
+
+.contact-leaves-art {
+  width: 7.5rem;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin-top: -0.7rem;
+  margin-right: -0.5rem;
+}
+
+/* =========================================
+   Left Card: Quick Channels (Row 1)
+========================================= */
+.contact-channels-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem;
+  margin-bottom: 1.4rem;
+}
+
+.contact-channel-card {
+  background: #fbfdfb;
+  border: 0.12rem solid #e2ebe4;
+  border-radius: 1.6rem;
+  padding: 1.4rem 1.6rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  transition: all 0.2s ease;
+}
+
+.contact-channel-card:hover {
+  background: #ffffff;
+  border-color: #bbf7d0;
+  box-shadow: 0 0.7rem 1.8rem rgba(22, 101, 52, 0.08);
+  transform: translateY(-0.15rem);
+}
+
+.channel-icon-wrap {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background: #15803d;
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  font-size: 1.85rem;
+  flex-shrink: 0;
+}
+
+.channel-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.channel-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.channel-top h4 {
+  font-size: 1.38rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.channel-badge {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #16794b;
+  background: #eaf7ee;
+  padding: 0.22rem 0.72rem;
+  border-radius: 9999px;
+  border: 0.1rem solid #bbf7d0;
+  white-space: nowrap;
+}
+
+.channel-link {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #16794b;
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  transition: color var(--transition-fast);
+}
+
+.channel-link:hover {
+  color: #15803d;
+  text-decoration: underline;
+}
+
+.channel-meta {
+  font-size: 1.2rem;
+  color: #64748b;
+}
+
+/* =========================================
+   Left Card: Depot Hub Card (Row 2)
+========================================= */
+.contact-depot-hub-card {
+  background: #fbfdfb;
+  border: 0.12rem solid #e2ebe4;
+  border-radius: 1.8rem;
+  padding: 1.8rem 1.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  margin-bottom: 1.4rem;
+  transition: all 0.2s ease;
+}
+
+.contact-depot-hub-card:hover {
+  background: #ffffff;
+  border-color: #bbf7d0;
+  box-shadow: 0 0.7rem 1.8rem rgba(22, 101, 52, 0.08);
+}
+
+.depot-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+}
+
+.depot-header-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.depot-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.depot-title-row h4 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.015em;
+}
+
+.depot-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #166534;
+  background: #eaf7ee;
+  padding: 0.25rem 0.8rem;
+  border-radius: 9999px;
+  border: 0.1rem solid #bbf7d0;
+  white-space: nowrap;
+}
+
+.depot-badge-icon {
+  font-size: 1.3rem;
+}
+
+.depot-address {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #334155;
+  display: block;
+}
+
+.depot-type {
+  font-size: 1.2rem;
+  color: #64748b;
+}
+
+/* Map & Timings Sub-Columns */
+.depot-details-row {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 1.4rem;
+  align-items: stretch;
+}
+
+.depot-map-box {
+  border-radius: 1.3rem;
+  overflow: hidden;
+  border: 0.12rem solid #e2ebe4;
+  background: #f8fafc;
+  height: 9.8rem;
+  display: flex;
+}
+
+.depot-map-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.depot-timings-box {
+  background: #f0fdf4;
+  border: 0.12rem solid #dcfce7;
+  border-radius: 1.3rem;
+  padding: 1.2rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  height: 9.8rem;
+}
+
+.timings-title {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 1.28rem;
+  font-weight: 700;
+  color: #166534;
+  margin-bottom: 0.5rem;
+}
+
+.timings-icon {
+  font-size: 1.5rem;
+}
+
+.timings-open {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #334155;
+  margin: 0 0 0.18rem;
+}
+
+.timings-closed {
+  font-size: 1.2rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.timings-deco-leaf {
+  position: absolute;
+  right: 0.9rem;
+  bottom: 0.5rem;
+  font-size: 2.8rem;
+  color: rgba(22, 163, 74, 0.16);
+  pointer-events: none;
+}
+
+/* =========================================
+   Left Card: Emergency Notice (Row 3)
+========================================= */
+.emergency-alert-card {
+  background: #fff5f5;
+  border: 0.12rem solid #fee2e2;
+  border-radius: 1.5rem;
+  padding: 1.4rem 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  text-align: left;
+  transition: all 0.2s ease;
+  margin-top: auto;
+}
+
+.emergency-alert-card:hover {
+  border-color: #fca5a5;
+  box-shadow: 0 0.6rem 1.8rem rgba(220, 38, 38, 0.08);
+}
+
+.emergency-alert-icon {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 1.1rem;
+  background: #fee2e2;
+  color: #dc2626;
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.emergency-alert-content {
+  flex: 1;
+}
+
+.emergency-alert-content h5 {
+  font-size: 1.48rem;
+  font-weight: 800;
+  color: #b91c1c;
+  margin: 0 0 0.18rem;
+  letter-spacing: -0.01em;
+}
+
+.emergency-alert-content p {
+  font-size: 1.28rem;
+  color: #475569;
+  margin: 0;
+  line-height: 1.38;
+}
+
+.emergency-alert-content strong {
+  color: #b91c1c;
+  font-weight: 800;
+}
+
+.emergency-arrow {
+  font-size: 1.8rem;
+  color: #dc2626;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.emergency-alert-card:hover .emergency-arrow {
+  transform: translateX(0.35rem);
+}
+
+/* =========================================
+   Right Card: Message Form (Scaled 90%)
+========================================= */
+.contact-form-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.contact-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem;
+}
+
+.contact-form-field {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.contact-form-field label {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+}
+
+.req-star {
+  color: #dc2626;
+  margin-left: 0.2rem;
+}
+
+.contact-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.field-icon {
+  position: absolute;
+  left: 1.3rem;
+  font-size: 1.7rem;
+  color: #16794b;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.contact-input-wrap input {
+  width: 100%;
+  padding: 1.05rem 1.3rem 1.05rem 4.1rem;
+  background: #fbfdfb;
+  border: 0.14rem solid #e2ebe4;
+  border-radius: 1.1rem;
+  font-size: 1.4rem;
+  color: #0f172a;
+  outline: none;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.contact-input-wrap input::placeholder {
+  color: #9ca3af;
+}
+
+.contact-input-wrap input:focus {
+  border-color: #16794b;
+  background: #ffffff;
+  box-shadow: 0 0 0 0.32rem rgba(22, 121, 75, 0.12);
+}
+
+/* Message Textarea */
+.contact-textarea-wrap {
+  position: relative;
+}
+
+.textarea-icon {
+  top: 1.2rem;
+}
+
+.contact-textarea-wrap textarea {
+  width: 100%;
+  padding: 1.1rem 1.3rem 2.4rem 4.1rem;
+  background: #fbfdfb;
+  border: 0.14rem solid #e2ebe4;
+  border-radius: 1.1rem;
+  font-size: 1.4rem;
+  color: #0f172a;
+  outline: none;
+  resize: vertical;
+  min-height: 9.5rem;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.contact-textarea-wrap textarea::placeholder {
+  color: #9ca3af;
+}
+
+.contact-textarea-wrap textarea:focus {
+  border-color: #16794b;
+  background: #ffffff;
+  box-shadow: 0 0 0 0.32rem rgba(22, 121, 75, 0.12);
+}
+
+.char-counter {
+  position: absolute;
+  right: 1.3rem;
+  bottom: 0.7rem;
+  font-size: 1.15rem;
+  color: #94a3b8;
+  font-weight: 500;
+  pointer-events: none;
+}
+
+.contact-error-text {
+  color: var(--error);
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+/* Primary Green Send Button */
+.btn-send-inquiry-primary {
+  width: 100%;
+  height: 4.8rem;
+  border-radius: 1.2rem;
+  background: #166534;
+  color: #ffffff;
+  border: none;
+  font-size: 1.55rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  box-shadow: 0 0.7rem 2.2rem rgba(22, 101, 52, 0.32);
+  transition: all 0.2s ease;
+  margin-top: 0.4rem;
+  font-family: inherit;
+}
+
+.btn-send-inquiry-primary:hover {
+  background: #14532d;
+  transform: translateY(-0.15rem);
+  box-shadow: 0 1rem 2.6rem rgba(22, 101, 52, 0.42);
+}
+
+.btn-send-inquiry-primary .send-icon {
+  font-size: 1.7rem;
+}
+
+/* Privacy Trust Pill */
+.contact-trust-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-top: 1rem;
+  color: #64748b;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.trust-icon {
+  color: #16a34a;
+  font-size: 1.6rem;
+}
+
+.contact-submitted-box {
+  padding: 3.8rem 2rem;
+  background: var(--primary-light);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  color: var(--primary-dark);
+}
+
+/* =========================================
+   Responsive Breakpoints
+========================================= */
+@media (max-width: 1024px) {
+  .contact-dual-grid {
+    grid-template-columns: 1fr;
+    gap: 2.6rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .contact-card-main {
+    padding: 2.4rem 2rem 2.2rem;
+    border-radius: 2rem;
+  }
+
+  .contact-main-title {
+    font-size: 2.4rem;
+  }
+
+  .contact-headset-art,
+  .contact-leaves-art {
+    width: 6.5rem;
+  }
+
+  .contact-channels-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .depot-details-row {
+    grid-template-columns: 1fr;
+  }
+
+  .depot-map-box,
+  .depot-timings-box {
+    height: 9rem;
+  }
+
+  .contact-form-row {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+}

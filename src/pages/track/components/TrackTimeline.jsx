@@ -5,25 +5,38 @@ export default function TrackTimeline({ timeline }) {
 
   return (
     <div className="tracker-timeline-box">
-      <h4
-        style={{
-          margin: "0 0 1.2rem",
-          fontSize: "1.45rem",
-          color: "var(--text-primary)",
-        }}
-      >
-        Milestone Audit Trail
-      </h4>
-      <div>
-        {timeline.map((event, idx) => (
-          <div key={idx} className="tracker-timeline-item">
-            <div className="tracker-timeline-dot" />
-            <div className="tracker-timeline-content">
-              <span className="tracker-timeline-time">{event.time}</span>
-              <span className="tracker-timeline-note">{event.note}</span>
+      <div className="tracker-timeline-header">
+        <h4 className="tracker-timeline-title">Milestone Audit Trail</h4>
+        <span className="tracker-timeline-badge">
+          {timeline.length} {timeline.length === 1 ? "Milestone" : "Milestones"}
+        </span>
+      </div>
+
+      <div className={`tracker-timeline-row items-${timeline.length}`}>
+        {timeline.map((event, idx) => {
+          const isLast = idx === timeline.length - 1;
+          return (
+            <div
+              key={idx}
+              className={`tracker-timeline-col ${isLast ? "is-latest" : ""}`}
+            >
+              <div className="tracker-timeline-node-line">
+                <div className="tracker-timeline-dot" aria-hidden="true" />
+                {!isLast && (
+                  <div
+                    className="tracker-timeline-connector"
+                    aria-hidden="true"
+                  />
+                )}
+              </div>
+
+              <div className="tracker-timeline-content">
+                <span className="tracker-timeline-time">{event.time}</span>
+                <span className="tracker-timeline-note">{event.note}</span>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

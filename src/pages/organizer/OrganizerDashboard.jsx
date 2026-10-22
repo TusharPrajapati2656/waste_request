@@ -38,12 +38,12 @@ export default function OrganizerDashboard() {
 
   return (
     <div className="organizer-dashboard">
-      <OrganizerBanner onResetData={handleResetData} />
-
       <div
         className="section-wrapper"
-        style={{ display: "flex", flexDirection: "column", gap: "3rem" }}
+        style={{ display: "flex", flexDirection: "column", gap: "3.5rem" }}
       >
+        <OrganizerBanner onResetData={handleResetData} />
+
         <OrganizerKpiGrid kpis={kpis} />
 
         <OrganizerControls

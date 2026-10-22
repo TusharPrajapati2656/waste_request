@@ -84,6 +84,9 @@ export default function TrackRequestCard({
           <div className="tracker-detail-content">
             <span className="tracker-detail-label">Pickup Location</span>
             <span className="tracker-detail-value">{req.address}</span>
+            {req.pincode && (
+              <span className="tracker-detail-sub" style={{ fontWeight: 600 }}>Pincode: {req.pincode}</span>
+            )}
             {req.landmark && (
               <span className="tracker-detail-sub">Near: {req.landmark}</span>
             )}

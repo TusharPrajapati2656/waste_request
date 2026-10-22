@@ -69,9 +69,11 @@
   --shadow-lg: 0 1.2rem 2.4rem rgb(20 54 34 / 8%);
   --shadow-modal: 0 2rem 6rem rgb(0 0 0 / 18%);
 
-  /* Layout */
-  --container-width: 128rem;
-  --container-max-width: 128rem;
+  /* Layout & Container Tokens */
+  --container-width: 126rem;
+  --container-max-width: 126rem;
+  --container-inline-gutter: clamp(3.2rem, 6vw, 8rem);
+  --section-padding-y: clamp(3.2rem, 4vw, 5.4rem);
   --header-height: 8rem;
   --z-header: 1000;
   --z-modal: 2000;
@@ -97,7 +99,7 @@
 
 html {
   min-width: 32rem;
-  font-size: 62.5%;
+  font-size: 53.125%; /* Scaled to 85% of base 62.5% (1rem = 8.5px) */
   scroll-behavior: smooth;
 }
 
@@ -159,6 +161,7 @@ ol {
 
 .page-content {
   width: min(calc(100% - var(--space-12)), var(--container-width));
+  max-width: var(--container-max-width);
   min-height: 60vh;
   margin-inline: auto;
   padding-block: 5rem;
@@ -167,6 +170,59 @@ ol {
 :focus-visible {
   outline: 0.2rem solid var(--primary);
   outline-offset: 0.3rem;
+}
+
+/* ==========================================================================
+   Universal Section Tag Pill (Live Pulse Dot + Mint Border Badge)
+   ========================================================================== */
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.55rem 1.45rem;
+  border-radius: 9999px;
+  background: #eaf7ee;
+  color: #166534;
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1.4rem;
+  border: 0.12rem solid #bbf7d0;
+  box-shadow: 0 0.2rem 0.8rem rgba(22, 101, 52, 0.08);
+  transition: all 0.25s ease;
+  line-height: 1.2;
+}
+
+.section-tag::before {
+  content: "";
+  display: inline-block;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+  background: #16a34a;
+  box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7);
+  animation: sectionLivePulse 1.8s infinite;
+  flex-shrink: 0;
+}
+
+.section-tag:hover {
+  background: #dcfce7;
+  border-color: #86efac;
+  transform: translateY(-0.1rem);
+  box-shadow: 0 0.4rem 1.2rem rgba(22, 101, 52, 0.12);
+}
+
+@keyframes sectionLivePulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 0.7rem rgba(22, 163, 74, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0);
+  }
 }
 
 @media (max-width: 480px) {

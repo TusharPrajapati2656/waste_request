@@ -25,14 +25,17 @@ export const footerContact = {
 
 export const footerSocialLinks = [
   {
+    id: "instagram",
     label: "Instagram",
     url: "https://www.instagram.com/",
   },
   {
+    id: "facebook",
     label: "Facebook",
     url: "https://www.facebook.com/",
   },
   {
+    id: "linkedin",
     label: "LinkedIn",
     url: "https://www.linkedin.com/",
   },
@@ -41,4 +44,5 @@ export const footerSocialLinks = [
 export const footerLegalLinks = [
   { label: "Privacy Policy", path: "/privacy-policy" },
   { label: "Terms of Service", path: "/terms" },
+  { label: "Admin Operations Portal", path: "/admin" },
 ];
