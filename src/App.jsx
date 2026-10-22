@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Header from "./common/header/Header";
 import Footer from "./common/Footer/Footer";
-import Home from "./pages/Home";
+import Home from "./pages/home/Home";
 import AboutUs from "./pages/AboutUs";
 import Services from "./pages/Services";
 import ContactUs from "./pages/ContactUs";
