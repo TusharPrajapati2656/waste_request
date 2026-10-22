@@ -16,11 +16,11 @@ import ContactSection from "./components/ContactSection";
 import CtaSection from "./components/CtaSection";
 
 import { servicesList } from "./data/homeData";
-import "../Home.css";
-import "../Services.css";
-import "../AboutUs.css";
-import "../FAQ.css";
-import "../ContactUs.css";
+import "./Home.css";
+import "./Services.css";
+import "./AboutUs.css";
+import "./FAQ.css";
+import "./ContactUs.css";
 
 export default function Home() {
   const estimator = useEstimator();

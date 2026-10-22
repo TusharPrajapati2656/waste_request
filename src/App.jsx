@@ -1,23 +1,26 @@
 // src/App.jsx
 
 import { useEffect } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Header from "./common/header/Header";
 import Footer from "./common/Footer/Footer";
 import Home from "./pages/home/Home";
-import AboutUs from "./pages/AboutUs";
-import Services from "./pages/Services";
-import ContactUs from "./pages/ContactUs";
-import FAQ from "./pages/FAQ";
 import TrackRequests from "./pages/TrackRequests";
 import Legal from "./pages/Legal";
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
+    if (hash) {
+      const el = document.querySelector(hash);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+        return;
+      }
+    }
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [pathname]);
+  }, [pathname, hash]);
 
   return null;
 }
@@ -30,15 +33,15 @@ const App = () => {
       <main style={{ flex: 1 }}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<AboutUs />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/services/:category" element={<Services />} />
-          <Route path="/contact" element={<ContactUs />} />
-          <Route path="/faq" element={<FAQ />} />
+          <Route path="/about" element={<Navigate to="/#about" replace />} />
+          <Route path="/services" element={<Navigate to="/#services" replace />} />
+          <Route path="/services/:category" element={<Navigate to="/#services" replace />} />
+          <Route path="/contact" element={<Navigate to="/#contact" replace />} />
+          <Route path="/faq" element={<Navigate to="/#faq" replace />} />
           <Route path="/my-requests" element={<TrackRequests />} />
           <Route path="/privacy-policy" element={<Legal type="privacy" />} />
           <Route path="/terms" element={<Legal type="terms" />} />
-          <Route path="*" element={<Home />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
       <Footer />
