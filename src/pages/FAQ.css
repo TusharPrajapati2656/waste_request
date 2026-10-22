@@ -1,0 +1,120 @@
+/* src/pages/FAQ.css */
+
+.faq-page {
+  display: flex;
+  flex-direction: column;
+  gap: 7rem;
+  padding-bottom: 8rem;
+}
+
+.faq-hero {
+  background: radial-gradient(circle at 10% 20%, rgba(22, 121, 75, 0.08) 0%, rgba(248, 251, 248, 0) 60%);
+  padding: 6rem 0 4rem;
+  border-bottom: 0.1rem solid var(--border);
+  text-align: center;
+}
+
+.faq-hero-content {
+  width: min(calc(100% - var(--space-8)), 80rem);
+  margin-inline: auto;
+}
+
+.faq-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.4rem 2rem;
+  border: 0.15rem solid var(--border-strong);
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  margin: 3.2rem auto 0;
+  max-width: 65rem;
+  transition: all var(--transition-fast);
+}
+
+.faq-search-wrap:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0.4rem 2rem rgba(22, 121, 75, 0.15);
+}
+
+.faq-search-wrap input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 1.6rem;
+  color: var(--text-primary);
+}
+
+/* Accordion list */
+.faq-accordion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  max-width: 85rem;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.faq-item {
+  background: var(--surface);
+  border: 0.1rem solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: all var(--transition-fast);
+}
+
+.faq-item.is-open {
+  border-color: rgba(22, 121, 75, 0.35);
+  box-shadow: var(--shadow-md);
+}
+
+.faq-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 2.4rem;
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.faq-question {
+  font-size: 1.75rem;
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+}
+
+.faq-icon-arrow {
+  width: 3.6rem;
+  height: 3.6rem;
+  border-radius: 50%;
+  background: var(--surface-muted);
+  color: var(--text-secondary);
+  display: grid;
+  place-items: center;
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+
+.faq-item.is-open .faq-icon-arrow {
+  background: var(--primary);
+  color: var(--text-inverse);
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  padding: 0 2.4rem 2.4rem;
+  font-size: 1.45rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  border-top: 0.1rem solid var(--border);
+  margin-top: 0.4rem;
+  padding-top: 2rem;
+}
