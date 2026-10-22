@@ -1,7 +1,7 @@
 // src/components/Header/Header.jsx
 
-import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   FiMenu,
   FiX,
@@ -16,6 +16,9 @@ import "./Header.css";
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const closeMenu = () => setIsMenuOpen(false);
 
@@ -24,15 +27,55 @@ export default function Header() {
     setIsAuthOpen(true);
   };
 
+  // Track active section as the user scrolls
+  useEffect(() => {
+    if (location.pathname !== "/") return;
+
+    const sectionIds = ["home", "services", "faq", "about", "contact"];
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 200;
+
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const id = sectionIds[i];
+        const el = document.getElementById(id);
+        if (el && el.offsetTop <= scrollPosition) {
+          setActiveSection(id);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [location.pathname]);
+
+  const handleNavClick = (e, item) => {
+    e.preventDefault();
+    closeMenu();
+
+    if (location.pathname !== "/") {
+      navigate(`/${item.path}`);
+      return;
+    }
+
+    const target = document.getElementById(item.id);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+      window.history.pushState(null, "", item.path);
+      setActiveSection(item.id);
+    }
+  };
+
   return (
     <>
       <header className="site-header">
         <div className="header-container">
           <Link
-            to="/"
+            to="/#home"
             className="header-brand"
             aria-label="GreenCycle home"
-            onClick={closeMenu}
+            onClick={(e) => handleNavClick(e, { path: "#home", id: "home" })}
           >
             <span className="brand-icon">
               <LuLeaf aria-hidden="true" />
@@ -67,16 +110,15 @@ export default function Header() {
             <ul className="navigation-list">
               {navigationLinks.map((item) => (
                 <li key={item.path}>
-                  <NavLink
-                    to={item.path}
-                    end={item.path === "/"}
-                    className={({ isActive }) =>
-                      `navigation-link ${isActive ? "active" : ""}`
-                    }
-                    onClick={closeMenu}
+                  <a
+                    href={item.path}
+                    className={`navigation-link ${
+                      activeSection === item.id ? "active" : ""
+                    }`}
+                    onClick={(e) => handleNavClick(e, item)}
                   >
                     {item.label}
-                  </NavLink>
+                  </a>
                 </li>
               ))}
             </ul>

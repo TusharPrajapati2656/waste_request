@@ -1,26 +1,25 @@
-
 /* src/components/Footer/FooterData.js */
 
 export const footerNavigation = [
-  { label: "Home", path: "/" },
-  { label: "About Us", path: "/about" },
-  { label: "Our Services", path: "/services" },
-  { label: "Contact Us", path: "/contact" },
-  { label: "Frequently Asked Questions", path: "/faq" },
+  { label: "Home", path: "#home", id: "home" },
+  { label: "Our Services", path: "#services", id: "services" },
+  { label: "Frequently Asked Questions", path: "#faq", id: "faq" },
+  { label: "About Us", path: "#about", id: "about" },
+  { label: "Contact Us", path: "#contact", id: "contact" },
 ];
 
 export const footerServices = [
-  { label: "Residential Waste Pickup", path: "/services/residential" },
-  { label: "Commercial Waste Collection", path: "/services/commercial" },
-  { label: "Recyclable Waste", path: "/services/recycling" },
-  { label: "Bulk Waste Pickup", path: "/services/bulk" },
+  { label: "Residential Waste Pickup", path: "#services", id: "services" },
+  { label: "Commercial Waste Collection", path: "#services", id: "services" },
+  { label: "Recyclable Waste Sorting", path: "#services", id: "services" },
+  { label: "Bulk Waste Pickup", path: "#services", id: "services" },
   { label: "Track Pickup Requests", path: "/my-requests" },
 ];
 
 export const footerContact = {
   email: "support@greencycle.example",
   phone: "+91 00000 00000",
-  address: "Update with your office address",
+  address: "GreenCycle Eco-Park, Sector 18, Clean City Hub",
 };
 
 export const footerSocialLinks = [

@@ -2,7 +2,7 @@
 /* src/components/Footer/Footer.jsx */
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   FiArrowUpRight,
   FiMapPin,
@@ -27,6 +27,7 @@ const currentYear = new Date().getFullYear();
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleNewsletterSubmit = (event) => {
     event.preventDefault();
@@ -41,6 +42,20 @@ export default function Footer() {
     setMessage(
       "Newsletter subscription is not available yet. Please try again later."
     );
+  };
+
+  const handleFooterClick = (e, path) => {
+    if (path.startsWith("#")) {
+      e.preventDefault();
+      const id = path.substring(1);
+      const target = document.getElementById(id);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+        window.history.pushState(null, "", path);
+      } else {
+        navigate(`/${path}`);
+      }
+    }
   };
 
   return (
@@ -84,8 +99,17 @@ export default function Footer() {
 
             <ul className="footer-link-list">
               {footerNavigation.map((item) => (
-                <li key={item.path}>
-                  <Link to={item.path}>{item.label}</Link>
+                <li key={item.label}>
+                  {item.path.startsWith("#") ? (
+                    <a
+                      href={item.path}
+                      onClick={(e) => handleFooterClick(e, item.path)}
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link to={item.path}>{item.label}</Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -96,8 +120,17 @@ export default function Footer() {
 
             <ul className="footer-link-list">
               {footerServices.map((service) => (
-                <li key={service.path}>
-                  <Link to={service.path}>{service.label}</Link>
+                <li key={service.label}>
+                  {service.path.startsWith("#") ? (
+                    <a
+                      href={service.path}
+                      onClick={(e) => handleFooterClick(e, service.path)}
+                    >
+                      {service.label}
+                    </a>
+                  ) : (
+                    <Link to={service.path}>{service.label}</Link>
+                  )}
                 </li>
               ))}
             </ul>
