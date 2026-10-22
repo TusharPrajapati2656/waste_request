@@ -52,21 +52,6 @@ export default function HeroSection({
               How It Works
             </button>
           </div>
-
-          <div className="hero-trust">
-            <div className="trust-item">
-              <span className="trust-number">48,500+</span>
-              <span className="trust-label">Tons Recycled</span>
-            </div>
-            <div className="trust-item">
-              <span className="trust-number">99.4%</span>
-              <span className="trust-label">On-time Pickups</span>
-            </div>
-            <div className="trust-item">
-              <span className="trust-number">35,000+</span>
-              <span className="trust-label">Happy Citizens</span>
-            </div>
-          </div>
         </div>
 
         {/* Quick Schedule Estimator Card */}

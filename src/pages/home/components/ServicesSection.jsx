@@ -1,6 +1,8 @@
 // src/pages/home/components/ServicesSection.jsx
 
-import { FiCheckCircle, FiSearch, FiX } from "react-icons/fi";
+import { Link } from "react-router-dom";
+import { FiCheckCircle, FiSearch, FiX, FiArrowRight } from "react-icons/fi";
+import { LuCoins, LuCheck } from "react-icons/lu";
 
 export default function ServicesSection({ servicesBooking }) {
   const {
@@ -11,6 +13,8 @@ export default function ServicesSection({ servicesBooking }) {
     selectedService,
     setSelectedService,
     bookingSuccess,
+    createdRequestId,
+    resetBookingModal,
     bookingData,
     setBookingData,
     handleBookingSubmit,
@@ -73,31 +77,83 @@ export default function ServicesSection({ servicesBooking }) {
       <div className="services-grid">
         {filteredServices.map((service) => (
           <div key={service.id} className="service-card">
-            <span className="service-badge">{service.badge}</span>
-            <div className="service-card-icon">{service.icon}</div>
-            <h3>{service.title}</h3>
-            <p>{service.description}</p>
-
-            <ul className="service-features">
-              {service.features.map((feat) => (
-                <li key={feat}>
-                  <FiCheckCircle aria-hidden="true" />
-                  <span>{feat}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="service-footer">
-              <div className="service-price">
-                <span className="price-val">{service.price}</span>
-                <span className="price-sub">{service.turnaround}</span>
+            {/* Top row: Icon + Title on left, Badge on right */}
+            <div className="service-card-top">
+              <div className="service-card-header-left">
+                <div className="service-card-icon" aria-hidden="true">
+                  {service.icon}
+                </div>
+                <h3 className="service-card-title">{service.title}</h3>
               </div>
+
+              {service.badge && (
+                <span className="service-badge">
+                  {service.badgeIcon}
+                  <span>{service.badge}</span>
+                </span>
+              )}
+            </div>
+
+            {/* Description */}
+            <p className="service-card-desc">{service.description}</p>
+
+            {/* Features 2x2 Grid with vertical divider */}
+            <div className="service-features-grid">
+              <div className="service-features-col">
+                {service.features
+                  .filter((_, idx) => idx % 2 === 0)
+                  .map((feat, idx) => (
+                    <div key={idx} className="service-feature-item">
+                      <span className="service-feature-icon" aria-hidden="true">
+                        {feat.icon || <LuCheck />}
+                      </span>
+                      <span className="service-feature-text">
+                        {feat.text || feat}
+                      </span>
+                    </div>
+                  ))}
+              </div>
+
+              <div className="service-features-divider" aria-hidden="true" />
+
+              <div className="service-features-col">
+                {service.features
+                  .filter((_, idx) => idx % 2 !== 0)
+                  .map((feat, idx) => (
+                    <div key={idx} className="service-feature-item">
+                      <span className="service-feature-icon" aria-hidden="true">
+                        {feat.icon || <LuCheck />}
+                      </span>
+                      <span className="service-feature-text">
+                        {feat.text || feat}
+                      </span>
+                    </div>
+                  ))}
+              </div>
+            </div>
+
+            {/* Horizontal Divider */}
+            <div className="service-card-divider" aria-hidden="true" />
+
+            {/* Footer: Price with Coins icon + Book Service Button */}
+            <div className="service-card-footer">
+              <div className="service-price-wrap">
+                <span className="service-price-icon" aria-hidden="true">
+                  <LuCoins />
+                </span>
+                <div className="service-price-copy">
+                  <span className="price-val">{service.price}</span>
+                  <span className="price-sub">{service.turnaround}</span>
+                </div>
+              </div>
+
               <button
                 type="button"
                 className="btn-book-service"
                 onClick={() => setSelectedService(service)}
               >
-                Book Service
+                <span>Book Service</span>
+                <FiArrowRight aria-hidden="true" />
               </button>
             </div>
           </div>
@@ -149,20 +205,20 @@ export default function ServicesSection({ servicesBooking }) {
         <div
           className="service-modal-overlay"
           onClick={(e) => {
-            if (e.target === e.currentTarget) setSelectedService(null);
+            if (e.target === e.currentTarget) resetBookingModal();
           }}
         >
           <div className="service-modal" role="dialog" aria-modal="true">
             <button
               className="auth-close"
               type="button"
-              onClick={() => setSelectedService(null)}
+              onClick={resetBookingModal}
               aria-label="Close booking modal"
             >
               <FiX />
             </button>
 
-            <span className="section-tag">Service Booking</span>
+            <span className="section-tag">Step 1: Create Request</span>
             <h2 style={{ margin: "0.8rem 0 0.4rem", fontSize: "2.2rem" }}>
               Request {selectedService.title}
             </h2>
@@ -173,28 +229,60 @@ export default function ServicesSection({ servicesBooking }) {
             {bookingSuccess ? (
               <div
                 style={{
-                  padding: "3rem",
+                  padding: "3.2rem",
                   textAlign: "center",
                   background: "var(--primary-light)",
                   borderRadius: "var(--radius-lg)",
                   color: "var(--primary-dark)",
                 }}
               >
-                <FiCheckCircle style={{ fontSize: "4rem", margin: "0 auto 1.2rem" }} />
-                <h3 style={{ margin: "0 0 0.8rem", fontSize: "2rem" }}>Pickup Request Confirmed!</h3>
-                <p style={{ margin: 0, fontSize: "1.4rem" }}>
-                  A confirmation SMS and tracking ID have been dispatched to {bookingData.phone || "your phone"}.
+                <FiCheckCircle style={{ fontSize: "4.5rem", margin: "0 auto 1.4rem", color: "var(--primary)" }} />
+                <h3 style={{ margin: "0 0 0.8rem", fontSize: "2.2rem" }}>Pickup Request Created!</h3>
+                <p style={{ margin: "0 0 1.6rem", fontSize: "1.45rem" }}>
+                  Your request has been logged. Use this unique tracking ID to track real-time collection updates:
                 </p>
+                <div
+                  style={{
+                    display: "inline-block",
+                    padding: "0.8rem 1.8rem",
+                    background: "var(--surface)",
+                    border: "0.15rem solid var(--primary)",
+                    borderRadius: "var(--radius-md)",
+                    fontSize: "2rem",
+                    fontWeight: "800",
+                    color: "var(--primary-dark)",
+                    letterSpacing: "0.08em",
+                    marginBottom: "2rem",
+                  }}
+                >
+                  {createdRequestId}
+                </div>
+                <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
+                  <Link
+                    to={`/my-requests?id=${createdRequestId}`}
+                    className="btn-primary"
+                    style={{ textDecoration: "none" }}
+                  >
+                    Track This Pickup <FiArrowRight />
+                  </Link>
+                  <button
+                    type="button"
+                    className="btn-secondary"
+                    onClick={resetBookingModal}
+                  >
+                    Done
+                  </button>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleBookingSubmit} className="booking-form">
                 <div className="form-group">
-                  <label htmlFor="service-client-name">Your Full Name</label>
+                  <label htmlFor="service-client-name">Your Full Name *</label>
                   <input
                     id="service-client-name"
                     type="text"
                     required
-                    placeholder="Enter full name"
+                    placeholder="e.g. Aarav Sharma"
                     value={bookingData.name}
                     onChange={(e) =>
                       setBookingData({ ...bookingData, name: e.target.value })
@@ -204,7 +292,7 @@ export default function ServicesSection({ servicesBooking }) {
 
                 <div className="form-row">
                   <div className="form-group">
-                    <label htmlFor="service-client-phone">Phone Number</label>
+                    <label htmlFor="service-client-phone">Phone Number *</label>
                     <input
                       id="service-client-phone"
                       type="tel"
@@ -218,7 +306,22 @@ export default function ServicesSection({ servicesBooking }) {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="service-client-date">Pickup Date</label>
+                    <label htmlFor="service-client-email">Email (Optional)</label>
+                    <input
+                      id="service-client-email"
+                      type="email"
+                      placeholder="you@example.com"
+                      value={bookingData.email}
+                      onChange={(e) =>
+                        setBookingData({ ...bookingData, email: e.target.value })
+                      }
+                    />
+                  </div>
+                </div>
+
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="service-client-date">Preferred Pickup Date *</label>
                     <input
                       id="service-client-date"
                       type="date"
@@ -229,15 +332,30 @@ export default function ServicesSection({ servicesBooking }) {
                       }
                     />
                   </div>
+
+                  <div className="form-group">
+                    <label htmlFor="service-client-slot">Preferred Slot *</label>
+                    <select
+                      id="service-client-slot"
+                      value={bookingData.timeSlot}
+                      onChange={(e) =>
+                        setBookingData({ ...bookingData, timeSlot: e.target.value })
+                      }
+                    >
+                      <option value="Morning (8:00 AM - 11:30 AM)">Morning (8:00 AM - 11:30 AM)</option>
+                      <option value="Afternoon (1:00 PM - 4:00 PM)">Afternoon (1:00 PM - 4:00 PM)</option>
+                      <option value="Evening (5:00 PM - 7:30 PM)">Evening (5:00 PM - 7:30 PM)</option>
+                    </select>
+                  </div>
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="service-client-address">Pickup Address & Landmark</label>
+                  <label htmlFor="service-client-address">Pickup Address & House/Flat *</label>
                   <input
                     id="service-client-address"
                     type="text"
                     required
-                    placeholder="House / Flat No., Street, Area, Pincode"
+                    placeholder="e.g. Flat 402, Green Meadows, Sector 14"
                     value={bookingData.address}
                     onChange={(e) =>
                       setBookingData({ ...bookingData, address: e.target.value })
@@ -245,8 +363,36 @@ export default function ServicesSection({ servicesBooking }) {
                   />
                 </div>
 
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="service-client-pin">Pincode / Area</label>
+                    <input
+                      id="service-client-pin"
+                      type="text"
+                      placeholder="e.g. 110001"
+                      value={bookingData.pincode}
+                      onChange={(e) =>
+                        setBookingData({ ...bookingData, pincode: e.target.value })
+                      }
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="service-client-volume">Estimated Volume / Bags</label>
+                    <input
+                      id="service-client-volume"
+                      type="text"
+                      placeholder="e.g. 2 bags cardboard / ~8 kg"
+                      value={bookingData.volume}
+                      onChange={(e) =>
+                        setBookingData({ ...bookingData, volume: e.target.value })
+                      }
+                    />
+                  </div>
+                </div>
+
                 <div className="form-group">
-                  <label htmlFor="service-client-notes">Special Instructions (Optional)</label>
+                  <label htmlFor="service-client-notes">Access or Driver Instructions</label>
                   <input
                     id="service-client-notes"
                     type="text"
@@ -259,7 +405,7 @@ export default function ServicesSection({ servicesBooking }) {
                 </div>
 
                 <button type="submit" className="btn-calculate" style={{ marginTop: "1rem" }}>
-                  Confirm Pickup Booking
+                  Submit Pickup Request
                 </button>
               </form>
             )}

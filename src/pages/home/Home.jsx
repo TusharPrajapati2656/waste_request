@@ -8,7 +8,6 @@ import { useContactForm } from "./hooks/useContactForm";
 import HeroSection from "./components/HeroSection";
 import CategoriesSection from "./components/CategoriesSection";
 import ProcessSection from "./components/ProcessSection";
-import ImpactSection from "./components/ImpactSection";
 import ServicesSection from "./components/ServicesSection";
 import AboutSection from "./components/AboutSection";
 import FaqSection from "./components/FaqSection";
@@ -55,7 +54,6 @@ export default function Home() {
       />
       <CategoriesSection />
       <ProcessSection />
-      <ImpactSection />
       <ServicesSection servicesBooking={servicesBooking} />
       <AboutSection />
       <FaqSection faq={faq} onScrollTo={scrollToAnchor} />

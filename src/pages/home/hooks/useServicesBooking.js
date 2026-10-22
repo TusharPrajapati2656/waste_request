@@ -2,28 +2,62 @@
 
 import { useState } from "react";
 import { servicesList, wasteDatabase } from "../data/homeData";
+import { requestStore } from "../../../services/requestStore";
 
 export function useServicesBooking() {
   const [activeServiceTab, setActiveServiceTab] = useState("all");
   const [searchCheckerQuery, setSearchCheckerQuery] = useState("");
   const [selectedService, setSelectedService] = useState(null);
   const [bookingSuccess, setBookingSuccess] = useState(false);
+  const [createdRequestId, setCreatedRequestId] = useState("");
   const [bookingData, setBookingData] = useState({
     name: "",
     phone: "",
+    email: "",
     address: "",
+    pincode: "",
     date: "",
+    timeSlot: "Morning (8:00 AM - 11:30 AM)",
+    volume: "2-3 bags / items",
     notes: "",
   });
 
   const handleBookingSubmit = (e) => {
     e.preventDefault();
+
+    const created = requestStore.create({
+      name: bookingData.name,
+      phone: bookingData.phone,
+      email: bookingData.email,
+      address: bookingData.address,
+      pincode: bookingData.pincode,
+      date: bookingData.date,
+      timeSlot: bookingData.timeSlot,
+      wasteType: selectedService ? selectedService.title : "Household Recyclables",
+      category: selectedService ? selectedService.category : "recyclables",
+      volume: bookingData.volume,
+      notes: bookingData.notes,
+    });
+
+    setCreatedRequestId(created.id);
     setBookingSuccess(true);
-    setTimeout(() => {
-      setBookingSuccess(false);
-      setSelectedService(null);
-      setBookingData({ name: "", phone: "", address: "", date: "", notes: "" });
-    }, 2500);
+  };
+
+  const resetBookingModal = () => {
+    setSelectedService(null);
+    setBookingSuccess(false);
+    setCreatedRequestId("");
+    setBookingData({
+      name: "",
+      phone: "",
+      email: "",
+      address: "",
+      pincode: "",
+      date: "",
+      timeSlot: "Morning (8:00 AM - 11:30 AM)",
+      volume: "2-3 bags / items",
+      notes: "",
+    });
   };
 
   const filteredServices =
@@ -47,6 +81,8 @@ export function useServicesBooking() {
     selectedService,
     setSelectedService,
     bookingSuccess,
+    createdRequestId,
+    resetBookingModal,
     bookingData,
     setBookingData,
     handleBookingSubmit,

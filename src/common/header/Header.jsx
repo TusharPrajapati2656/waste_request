@@ -50,9 +50,21 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [location.pathname]);
 
+  const isItemActive = (item) => {
+    if (item.path.startsWith("/")) {
+      return location.pathname === item.path;
+    }
+    return location.pathname === "/" && activeSection === item.id;
+  };
+
   const handleNavClick = (e, item) => {
     e.preventDefault();
     closeMenu();
+
+    if (item.path.startsWith("/")) {
+      navigate(item.path);
+      return;
+    }
 
     if (location.pathname !== "/") {
       navigate(`/${item.path}`);
@@ -113,7 +125,7 @@ export default function Header() {
                   <a
                     href={item.path}
                     className={`navigation-link ${
-                      activeSection === item.id ? "active" : ""
+                      isItemActive(item) ? "active" : ""
                     }`}
                     onClick={(e) => handleNavClick(e, item)}
                   >
