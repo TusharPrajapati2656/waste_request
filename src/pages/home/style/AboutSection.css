@@ -5,66 +5,199 @@
   overflow: hidden;
 }
 
+/* 4 Cards in One Row on Desktop */
 .about-pillars {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
-  gap: 2.4rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.2rem;
   text-align: left;
 }
 
 .pillar-card {
-  background: var(--surface);
-  border: 0.1rem solid var(--border);
-  border-radius: var(--radius-xl);
-  padding: 3.2rem;
+  background: #ffffff;
+  border: 0.12rem solid #bbf7d0;
+  border-radius: 2.2rem;
+  padding: 2.6rem 2.2rem 2.2rem;
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
-  box-shadow: var(--shadow-sm);
-  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 1rem 3rem -0.6rem rgba(22, 101, 52, 0.07),
+    0 0.2rem 0.8rem rgba(0, 0, 0, 0.02);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .pillar-card:hover {
   transform: translateY(-0.4rem);
-  border-color: rgba(22, 121, 75, 0.3);
-  box-shadow: var(--shadow-md);
+  border-color: #86efac;
+  box-shadow:
+    0 1.8rem 4rem -0.8rem rgba(22, 101, 52, 0.12),
+    0 0.4rem 1.4rem rgba(0, 0, 0, 0.03);
 }
 
+/* Top Row: Icon + Split 2-tone Title */
 .pillar-header {
   display: flex;
   align-items: center;
-  gap: 1.6rem;
+  gap: 1.4rem;
 }
 
 .pillar-icon {
-  width: 5.2rem;
-  height: 5.2rem;
+  width: 5rem;
+  height: 5rem;
   border-radius: 1.4rem;
   background: #eaf7ee;
-  color: var(--primary);
+  color: #16794b;
   display: grid;
   place-items: center;
-  font-size: 2.4rem;
+  font-size: 2.5rem;
   flex-shrink: 0;
-  transition: transform var(--transition-fast);
+  border: 0.12rem solid #d1fae5;
+  transition: transform 0.25s ease;
 }
 
 .pillar-card:hover .pillar-icon {
   transform: scale(1.05);
 }
 
-.pillar-header h3,
-.pillar-card h3 {
-  font-size: 1.9rem;
-  font-weight: var(--font-bold);
-  color: var(--text-primary);
+.pillar-title {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
   margin: 0;
-  line-height: 1.3;
+  min-width: 0;
 }
 
-.pillar-card p {
+.pillar-title .title-dark {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.025em;
+}
+
+.pillar-title .title-green {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #16794b;
+  letter-spacing: -0.025em;
+}
+
+/* Description */
+.pillar-desc {
+  font-size: 1.35rem;
+  color: #4b5563;
+  line-height: 1.5;
+  font-weight: 500;
+  margin: 1.6rem 0 2rem;
+}
+
+/* Bottom Metric Pill Widget */
+.pillar-metric-pill {
+  margin-top: auto;
+  background: #f0fbf4;
+  border: 0.12rem solid #d1fae5;
+  border-radius: 1.6rem;
+  padding: 1.1rem 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.pillar-progress-ring-wrap {
+  position: relative;
+  width: 4.6rem;
+  height: 4.6rem;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.pillar-progress-svg {
+  transform: rotate(-90deg);
+}
+
+.pillar-progress-circle {
+  transition: stroke-dashoffset 0.6s ease;
+}
+
+.pillar-progress-text {
+  position: absolute;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+}
+
+.pillar-metric-divider {
+  width: 0.1rem;
+  height: 3.2rem;
+  background: #ccebd7;
+  flex-shrink: 0;
+}
+
+.pillar-metric-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.pillar-metric-label {
   font-size: 1.45rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin: 0;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+.pillar-metric-sub {
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: #64748b;
+  line-height: 1.25;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1200px) {
+  .about-pillars {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .about-pillars {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .pillar-card {
+    padding: 2.2rem 1.8rem;
+    border-radius: 1.8rem;
+  }
+
+  .pillar-icon {
+    width: 4.6rem;
+    height: 4.6rem;
+    font-size: 2.3rem;
+    border-radius: 1.3rem;
+  }
+
+  .pillar-title .title-dark,
+  .pillar-title .title-green {
+    font-size: 1.75rem;
+  }
+
+  .pillar-desc {
+    font-size: 1.35rem;
+    margin: 1.6rem 0 1.8rem;
+  }
+
+  .pillar-metric-pill {
+    padding: 1rem 1.2rem;
+    gap: 1.1rem;
+  }
 }

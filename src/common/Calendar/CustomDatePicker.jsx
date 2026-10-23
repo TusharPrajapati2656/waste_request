@@ -20,6 +20,7 @@ export default function CustomDatePicker({
   disabled = false,
   singleMonth = true,
   variant = "default",
+  align = "left",
   className = "",
   ariaLabel,
   title = "Select pickup date",
@@ -89,7 +90,7 @@ export default function CustomDatePicker({
   return (
     <div
       ref={containerRef}
-      className={`custom-datepicker-wrap variant-${variant} ${isOpen ? "is-open" : ""} ${disabled ? "is-disabled" : ""} ${className}`}
+      className={`custom-datepicker-wrap variant-${variant} align-${align} ${isOpen ? "is-open" : ""} ${disabled ? "is-disabled" : ""} ${className}`}
     >
       <button
         id={id}

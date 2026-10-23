@@ -2,7 +2,9 @@
 
 .contact-section {
   position: relative;
-  background: #f8fbf9 url("../../../assets/image/contact_background.png") no-repeat center bottom / cover;  overflow: hidden;
+  background: #f8fbf9 url("../../../assets/image/contact_background.png") no-repeat center bottom / cover;
+  padding: var(--section-padding-y) 0;
+  overflow: hidden;
 }
 
 /* Scaled container matching unified site standard */
@@ -18,19 +20,19 @@
 .contact-dual-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2.5rem;
+  gap: 2.8rem;
   align-items: stretch;
 }
 
-/* Common Elevated Card Base (Scaled to ~90%) */
+/* Common Elevated Card Base */
 .contact-card-main {
   background: #ffffff;
   border: 0.12rem solid #e4ede7;
-  border-radius: 2.5rem;
-  padding: 3rem 2.8rem 2.6rem;
+  border-radius: 2.6rem;
+  padding: 3.4rem 3.2rem 3rem;
   box-shadow:
-    0 0.9rem 3rem -0.4rem rgba(22, 101, 52, 0.05),
-    0 0.2rem 0.5rem rgba(0, 0, 0, 0.02);
+    0 1rem 3.5rem rgba(15, 23, 42, 0.04),
+    0 0.2rem 0.6rem rgba(0, 0, 0, 0.02);
   display: flex;
   flex-direction: column;
   position: relative;
@@ -43,7 +45,7 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 1.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 2.2rem;
 }
 
 .contact-card-header-left {
@@ -54,50 +56,57 @@
 .contact-card-tag {
   display: inline-flex;
   align-items: center;
-  gap: 0.7rem;
-  font-size: 1.2rem;
+  gap: 0.75rem;
+  font-size: 1.25rem;
   font-weight: 800;
   color: #16794b;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  margin-bottom: 0.7rem;
+  margin-bottom: 0.8rem;
 }
 
 .tag-dot {
-  width: 0.7rem;
-  height: 0.7rem;
+  width: 0.75rem;
+  height: 0.75rem;
   border-radius: 50%;
   background: #16a34a;
+  display: inline-block;
 }
 
 .contact-main-title {
-  font-size: 2.8rem;
+  font-size: clamp(2.6rem, 2.5vw, 3.2rem);
   font-weight: 800;
   color: #0f172a;
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.6rem;
   letter-spacing: -0.025em;
   line-height: 1.2;
 }
 
 .contact-main-desc {
-  font-size: 1.38rem;
+  font-size: 1.45rem;
   color: #64748b;
   margin: 0;
-  line-height: 1.48;
+  line-height: 1.5;
 }
 
-/* Header Art Images (90% scaled) */
+/* Header Art Images (Preserved Headset & Leaves) */
 .contact-card-header-art {
   flex-shrink: 0;
 }
 
 .contact-headset-art {
-  width: 9.5rem;
+  width: 8.8rem;
   height: auto;
   object-fit: contain;
   display: block;
-  margin-top: -0.7rem;
-  margin-right: -0.5rem;
+  margin-top: -0.6rem;
+  margin-right: -0.4rem;
+  filter: drop-shadow(0 0.6rem 1.4rem rgba(22, 101, 52, 0.12));
+  transition: transform 0.3s ease;
+}
+
+.contact-headset-art:hover {
+  transform: scale(1.05) rotate(-3deg);
 }
 
 .contact-leaves-art {
@@ -105,166 +114,116 @@
   height: auto;
   object-fit: contain;
   display: block;
-  margin-top: -0.7rem;
-  margin-right: -0.5rem;
+  margin-top: -0.6rem;
+  margin-right: -0.4rem;
+  filter: drop-shadow(0 0.6rem 1.4rem rgba(22, 101, 52, 0.12));
+  transition: transform 0.3s ease;
+}
+
+.contact-leaves-art:hover {
+  transform: scale(1.06) rotate(3deg);
 }
 
 /* =========================================
-   Left Card: Quick Channels (Row 1)
+   Left Card: Contact Items Stack (4 Rows)
 ========================================= */
-.contact-channels-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.4rem;
-  margin-bottom: 1.4rem;
-}
-
-.contact-channel-card {
-  background: #fbfdfb;
-  border: 0.12rem solid #e2ebe4;
-  border-radius: 1.6rem;
-  padding: 1.4rem 1.6rem;
+.contact-items-stack {
   display: flex;
-  align-items: flex-start;
-  gap: 1.2rem;
-  transition: all 0.2s ease;
+  flex-direction: column;
+  gap: 1.4rem;
+  flex: 1;
+  justify-content: space-between;
+  margin-top: 0.4rem;
 }
 
-.contact-channel-card:hover {
+.contact-row-card {
+  background: #f4faf6;
+  border: 0.12rem solid #dcf2e3;
+  border-radius: 1.8rem;
+  padding: 1.6rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  text-align: left;
+  transition: all 0.25s ease;
+}
+
+.contact-row-card:hover {
   background: #ffffff;
   border-color: #bbf7d0;
-  box-shadow: 0 0.7rem 1.8rem rgba(22, 101, 52, 0.08);
+  box-shadow: 0 0.8rem 2.2rem rgba(22, 101, 52, 0.08);
   transform: translateY(-0.15rem);
 }
 
-.channel-icon-wrap {
-  width: 4rem;
-  height: 4rem;
+.contact-circle-icon {
+  width: 4.8rem;
+  height: 4.8rem;
   border-radius: 50%;
-  background: #15803d;
+  background: #166534;
   color: #ffffff;
   display: grid;
   place-items: center;
-  font-size: 1.85rem;
+  font-size: 2.1rem;
   flex-shrink: 0;
+  box-shadow: 0 0.4rem 1.2rem rgba(22, 101, 52, 0.2);
 }
 
-.channel-info {
+.contact-row-content {
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.3rem;
 }
 
-.channel-top {
+.contact-row-title-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: 0.8rem;
   flex-wrap: wrap;
 }
 
-.channel-top h4 {
-  font-size: 1.38rem;
-  font-weight: 700;
+.contact-row-title {
+  font-size: 1.55rem;
+  font-weight: 800;
   color: #0f172a;
   margin: 0;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
 }
 
-.channel-badge {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #16794b;
-  background: #eaf7ee;
-  padding: 0.22rem 0.72rem;
-  border-radius: 9999px;
-  border: 0.1rem solid #bbf7d0;
-  white-space: nowrap;
-}
-
-.channel-link {
-  font-size: 1.45rem;
+.contact-row-val {
+  font-size: 1.65rem;
   font-weight: 800;
-  color: #16794b;
+  color: #16a34a;
   text-decoration: none;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  display: block;
-  transition: color var(--transition-fast);
+  display: inline-block;
+  line-height: 1.3;
+  transition: color 0.2s ease;
 }
 
-.channel-link:hover {
+.contact-row-val:hover {
   color: #15803d;
   text-decoration: underline;
 }
 
-.channel-meta {
-  font-size: 1.2rem;
+.contact-row-subtext {
+  font-size: 1.3rem;
   color: #64748b;
-}
-
-/* =========================================
-   Left Card: Depot Hub Card (Row 2)
-========================================= */
-.contact-depot-hub-card {
-  background: #fbfdfb;
-  border: 0.12rem solid #e2ebe4;
-  border-radius: 1.8rem;
-  padding: 1.8rem 1.9rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.4rem;
-  margin-bottom: 1.4rem;
-  transition: all 0.2s ease;
-}
-
-.contact-depot-hub-card:hover {
-  background: #ffffff;
-  border-color: #bbf7d0;
-  box-shadow: 0 0.7rem 1.8rem rgba(22, 101, 52, 0.08);
-}
-
-.depot-header {
-  display: flex;
-  align-items: flex-start;
-  gap: 1.2rem;
-}
-
-.depot-header-info {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.depot-title-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.9rem;
-  flex-wrap: wrap;
-}
-
-.depot-title-row h4 {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: #0f172a;
   margin: 0;
-  letter-spacing: -0.015em;
+  line-height: 1.4;
 }
 
-.depot-badge {
+.depot-welcome-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.5rem;
   font-size: 1.15rem;
   font-weight: 700;
   color: #166534;
   background: #eaf7ee;
-  padding: 0.25rem 0.8rem;
+  padding: 0.25rem 0.85rem;
   border-radius: 9999px;
   border: 0.1rem solid #bbf7d0;
   white-space: nowrap;
@@ -274,172 +233,75 @@
   font-size: 1.3rem;
 }
 
-.depot-address {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: #334155;
-  display: block;
-}
-
-.depot-type {
-  font-size: 1.2rem;
-  color: #64748b;
-}
-
-/* Map & Timings Sub-Columns */
-.depot-details-row {
-  display: grid;
-  grid-template-columns: 1.35fr 1fr;
-  gap: 1.4rem;
-  align-items: stretch;
-}
-
-.depot-map-box {
-  border-radius: 1.3rem;
-  overflow: hidden;
-  border: 0.12rem solid #e2ebe4;
-  background: #f8fafc;
-  height: 9.8rem;
-  display: flex;
-}
-
-.depot-map-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.depot-timings-box {
-  background: #f0fdf4;
-  border: 0.12rem solid #dcfce7;
-  border-radius: 1.3rem;
-  padding: 1.2rem 1.4rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  height: 9.8rem;
-}
-
-.timings-title {
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-  font-size: 1.28rem;
-  font-weight: 700;
-  color: #166534;
-  margin-bottom: 0.5rem;
-}
-
-.timings-icon {
-  font-size: 1.5rem;
-}
-
-.timings-open {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #334155;
-  margin: 0 0 0.18rem;
-}
-
-.timings-closed {
-  font-size: 1.2rem;
-  color: #64748b;
-  margin: 0;
-}
-
-.timings-deco-leaf {
-  position: absolute;
-  right: 0.9rem;
-  bottom: 0.5rem;
-  font-size: 2.8rem;
-  color: rgba(22, 163, 74, 0.16);
-  pointer-events: none;
-}
-
-/* =========================================
-   Left Card: Emergency Notice (Row 3)
-========================================= */
-.emergency-alert-card {
-  background: #fff5f5;
+/* Left Card: Emergency Notice Card */
+.contact-emergency-card {
+  background: #fef2f2;
   border: 0.12rem solid #fee2e2;
-  border-radius: 1.5rem;
-  padding: 1.4rem 1.8rem;
+  border-radius: 1.8rem;
+  padding: 1.6rem 2rem;
   display: flex;
   align-items: center;
-  gap: 1.4rem;
+  gap: 1.6rem;
   text-align: left;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
   margin-top: auto;
 }
 
-.emergency-alert-card:hover {
+.contact-emergency-card:hover {
   border-color: #fca5a5;
-  box-shadow: 0 0.6rem 1.8rem rgba(220, 38, 38, 0.08);
+  box-shadow: 0 0.8rem 2.2rem rgba(220, 38, 38, 0.08);
 }
 
-.emergency-alert-icon {
-  width: 4rem;
-  height: 4rem;
-  border-radius: 1.1rem;
+.emergency-square-icon {
+  width: 4.8rem;
+  height: 4.8rem;
+  border-radius: 1.3rem;
   background: #fee2e2;
   color: #dc2626;
   display: grid;
   place-items: center;
-  font-size: 2rem;
+  font-size: 2.2rem;
   flex-shrink: 0;
 }
 
-.emergency-alert-content {
+.emergency-content {
   flex: 1;
 }
 
-.emergency-alert-content h5 {
-  font-size: 1.48rem;
+.emergency-headline {
+  font-size: 1.55rem;
   font-weight: 800;
   color: #b91c1c;
-  margin: 0 0 0.18rem;
+  margin: 0 0 0.25rem;
   letter-spacing: -0.01em;
 }
 
-.emergency-alert-content p {
-  font-size: 1.28rem;
+.emergency-text {
+  font-size: 1.35rem;
   color: #475569;
   margin: 0;
-  line-height: 1.38;
+  line-height: 1.4;
 }
 
-.emergency-alert-content strong {
-  color: #b91c1c;
+.emergency-highlight {
+  color: #dc2626;
   font-weight: 800;
 }
 
-.emergency-arrow {
-  font-size: 1.8rem;
-  color: #dc2626;
-  flex-shrink: 0;
-  transition: transform 0.2s ease;
-}
-
-.emergency-alert-card:hover .emergency-arrow {
-  transform: translateX(0.35rem);
-}
-
 /* =========================================
-   Right Card: Message Form (Scaled 90%)
+   Right Card: Message Form
 ========================================= */
 .contact-form-flow {
   display: flex;
   flex-direction: column;
-  gap: 1.4rem;
+  gap: 1.5rem;
+  margin-top: 0.4rem;
 }
 
 .contact-form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.4rem;
+  gap: 1.5rem;
 }
 
 .contact-form-field {
@@ -449,15 +311,15 @@
 }
 
 .contact-form-field label {
-  font-size: 1.3rem;
+  font-size: 1.35rem;
   font-weight: 700;
   color: #0f172a;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
 }
 
 .req-star {
   color: #dc2626;
-  margin-left: 0.2rem;
+  margin-left: 0.25rem;
 }
 
 .contact-input-wrap {
@@ -468,20 +330,20 @@
 
 .field-icon {
   position: absolute;
-  left: 1.3rem;
-  font-size: 1.7rem;
-  color: #16794b;
+  left: 1.4rem;
+  font-size: 1.8rem;
+  color: #16a34a;
   pointer-events: none;
   z-index: 1;
 }
 
 .contact-input-wrap input {
   width: 100%;
-  padding: 1.05rem 1.3rem 1.05rem 4.1rem;
+  padding: 1.15rem 1.4rem 1.15rem 4.3rem;
   background: #fbfdfb;
   border: 0.14rem solid #e2ebe4;
-  border-radius: 1.1rem;
-  font-size: 1.4rem;
+  border-radius: 1.2rem;
+  font-size: 1.45rem;
   color: #0f172a;
   outline: none;
   font-family: inherit;
@@ -489,13 +351,27 @@
 }
 
 .contact-input-wrap input::placeholder {
-  color: #9ca3af;
+  color: #94a3b8;
 }
 
 .contact-input-wrap input:focus {
   border-color: #16794b;
   background: #ffffff;
-  box-shadow: 0 0 0 0.32rem rgba(22, 121, 75, 0.12);
+  box-shadow: 0 0 0 0.35rem rgba(22, 121, 75, 0.12);
+}
+
+/* Form Dropdown Customization */
+.contact-form-field .custom-dropdown-trigger {
+  background: #fbfdfb;
+  border: 0.14rem solid #e2ebe4;
+  border-radius: 1.2rem;
+  padding: 1.15rem 1.4rem;
+  min-height: 4.8rem;
+}
+
+.contact-form-field .custom-dropdown-lead-icon {
+  font-size: 1.8rem;
+  color: #16a34a;
 }
 
 /* Message Textarea */
@@ -504,39 +380,40 @@
 }
 
 .textarea-icon {
-  top: 1.2rem;
+  top: 1.35rem;
+  left: 1.4rem;
 }
 
 .contact-textarea-wrap textarea {
   width: 100%;
-  padding: 1.1rem 1.3rem 2.4rem 4.1rem;
+  padding: 1.2rem 1.4rem 2.4rem 4.3rem;
   background: #fbfdfb;
   border: 0.14rem solid #e2ebe4;
-  border-radius: 1.1rem;
-  font-size: 1.4rem;
+  border-radius: 1.2rem;
+  font-size: 1.45rem;
   color: #0f172a;
   outline: none;
   resize: vertical;
-  min-height: 9.5rem;
+  min-height: 10.2rem;
   font-family: inherit;
   transition: all 0.2s ease;
 }
 
 .contact-textarea-wrap textarea::placeholder {
-  color: #9ca3af;
+  color: #94a3b8;
 }
 
 .contact-textarea-wrap textarea:focus {
   border-color: #16794b;
   background: #ffffff;
-  box-shadow: 0 0 0 0.32rem rgba(22, 121, 75, 0.12);
+  box-shadow: 0 0 0 0.35rem rgba(22, 121, 75, 0.12);
 }
 
 .char-counter {
   position: absolute;
-  right: 1.3rem;
-  bottom: 0.7rem;
-  font-size: 1.15rem;
+  right: 1.4rem;
+  bottom: 0.8rem;
+  font-size: 1.2rem;
   color: #94a3b8;
   font-weight: 500;
   pointer-events: none;
@@ -552,32 +429,32 @@
 /* Primary Green Send Button */
 .btn-send-inquiry-primary {
   width: 100%;
-  height: 4.8rem;
-  border-radius: 1.2rem;
+  height: 5rem;
+  border-radius: 1.3rem;
   background: #166534;
   color: #ffffff;
   border: none;
-  font-size: 1.55rem;
+  font-size: 1.6rem;
   font-weight: 700;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.9rem;
-  box-shadow: 0 0.7rem 2.2rem rgba(22, 101, 52, 0.32);
+  gap: 1rem;
+  box-shadow: 0 0.8rem 2.4rem rgba(22, 101, 52, 0.28);
   transition: all 0.2s ease;
-  margin-top: 0.4rem;
+  margin-top: 0.5rem;
   font-family: inherit;
 }
 
 .btn-send-inquiry-primary:hover {
   background: #14532d;
   transform: translateY(-0.15rem);
-  box-shadow: 0 1rem 2.6rem rgba(22, 101, 52, 0.42);
+  box-shadow: 0 1.2rem 2.8rem rgba(22, 101, 52, 0.38);
 }
 
 .btn-send-inquiry-primary .send-icon {
-  font-size: 1.7rem;
+  font-size: 1.8rem;
 }
 
 /* Privacy Trust Pill */
@@ -585,16 +462,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.65rem;
-  margin-top: 1rem;
+  gap: 0.7rem;
+  margin-top: 1.2rem;
   color: #64748b;
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   font-weight: 500;
 }
 
 .trust-icon {
   color: #16a34a;
-  font-size: 1.6rem;
+  font-size: 1.7rem;
 }
 
 .contact-submitted-box {
@@ -617,7 +494,7 @@
 
 @media (max-width: 640px) {
   .contact-card-main {
-    padding: 2.4rem 2rem 2.2rem;
+    padding: 2.6rem 2rem 2.4rem;
     border-radius: 2rem;
   }
 
@@ -630,21 +507,13 @@
     width: 6.5rem;
   }
 
-  .contact-channels-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .depot-details-row {
-    grid-template-columns: 1fr;
-  }
-
-  .depot-map-box,
-  .depot-timings-box {
-    height: 9rem;
-  }
-
   .contact-form-row {
     grid-template-columns: 1fr;
     gap: 1.2rem;
+  }
+
+  .contact-row-card,
+  .contact-emergency-card {
+    padding: 1.4rem 1.6rem;
   }
 }

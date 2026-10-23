@@ -10,7 +10,6 @@ import AdminDriverModal from "./components/AdminDriverModal";
 import AdminOverviewView from "./views/AdminOverviewView";
 import AdminRequestsView from "./views/AdminRequestsView";
 import AdminFleetView from "./views/AdminFleetView";
-import AdminAnalyticsView from "./views/AdminAnalyticsView";
 import AdminCategoriesView from "./views/AdminCategoriesView";
 import AdminAuditView from "./views/AdminAuditView";
 import AdminSettingsView from "./views/AdminSettingsView";
@@ -381,10 +380,6 @@ export default function AdminApp() {
                 onDeleteDriver={handleDeleteDriver}
                 onUpdateDriverStatus={handleUpdateDriverStatus}
               />
-            )}
-
-            {currentTab === "analytics" && (
-              <AdminAnalyticsView requests={requests} settings={settings} />
             )}
 
             {currentTab === "categories" && (

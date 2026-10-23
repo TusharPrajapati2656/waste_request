@@ -1,11 +1,20 @@
 // src/pages/admin/services/adminAuditStore.js
 
-const AUDIT_STORAGE_KEY = "greencycle_admin_audit_logs_v1";
+const AUDIT_STORAGE_KEY = "greencycle_admin_audit_logs_v3";
 
 const INITIAL_LOGS = [
   {
+    id: "LOG-6570",
+    timestamp: new Date(Date.now() - 1000 * 60 * 10).toISOString(),
+    action: "BULK_DELETE",
+    operator: "Tushar Kumar",
+    target: "4 items",
+    details: "Bulk deleted requests: GC-84920, GC-84712, GC-83905, GC-85102",
+    severity: "danger",
+  },
+  {
     id: "LOG-901",
-    timestamp: new Date(Date.now() - 1000 * 60 * 18).toISOString(),
+    timestamp: new Date(Date.now() - 1000 * 60 * 45).toISOString(),
     action: "STATUS_UPDATE",
     operator: "Admin (Dispatch)",
     target: "GC-84920",
@@ -46,6 +55,69 @@ const INITIAL_LOGS = [
     operator: "System Telematics",
     target: "DRV-101",
     details: "Electric Van #12 battery reported at 78%. Geo-fence Sector 14 checked.",
+    severity: "info",
+  },
+  {
+    id: "LOG-906",
+    timestamp: new Date(Date.now() - 1000 * 60 * 360).toISOString(),
+    action: "STATUS_UPDATE",
+    operator: "Admin (Dispatch)",
+    target: "GC-84109",
+    details: "Marked status as Verified by depot inspection team. Total weight audited at 24.5 kg.",
+    severity: "info",
+  },
+  {
+    id: "LOG-907",
+    timestamp: new Date(Date.now() - 1000 * 60 * 420).toISOString(),
+    action: "FLEET_STATUS",
+    operator: "System Telematics",
+    target: "DRV-104",
+    details: "Battery level checked at 92%. Assigned optimal route for South Delhi corridors.",
+    severity: "info",
+  },
+  {
+    id: "LOG-908",
+    timestamp: new Date(Date.now() - 1000 * 60 * 490).toISOString(),
+    action: "NEW_CITIZEN_BOOKING",
+    operator: "Citizen Portal",
+    target: "GC-84220",
+    details: "Commercial electronic pickup scheduled for TechHub Tower 3 (55 kg).",
+    severity: "info",
+  },
+  {
+    id: "LOG-909",
+    timestamp: new Date(Date.now() - 1000 * 60 * 550).toISOString(),
+    action: "CERTIFICATE_ISSUED",
+    operator: "Admin (Compliance)",
+    target: "GC-83890",
+    details: "Issued recycling certificate #GC-CR-8821 for 180 kg segregated dry plastics.",
+    severity: "success",
+  },
+  {
+    id: "LOG-910",
+    timestamp: new Date(Date.now() - 1000 * 60 * 620).toISOString(),
+    action: "DRIVER_ASSIGN",
+    operator: "Admin (Dispatch)",
+    target: "GC-84011",
+    details: "Assigned Amit Verma for medical and hazardous safety waste collection.",
+    severity: "info",
+  },
+  {
+    id: "LOG-911",
+    timestamp: new Date(Date.now() - 1000 * 60 * 700).toISOString(),
+    action: "STATUS_UPDATE",
+    operator: "Admin (Dispatch)",
+    target: "GC-83995",
+    details: "Completed drop-off at Sector 14 Materials Recovery Facility.",
+    severity: "info",
+  },
+  {
+    id: "LOG-912",
+    timestamp: new Date(Date.now() - 1000 * 60 * 780).toISOString(),
+    action: "NEW_CITIZEN_BOOKING",
+    operator: "Citizen Portal",
+    target: "GC-83944",
+    details: "New online pickup logged by citizen Vikram Malhotra for Dry Recyclables (12 kg).",
     severity: "info",
   },
 ];

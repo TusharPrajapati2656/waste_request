@@ -627,27 +627,6 @@
   transform: translateY(-0.1rem);
 }
 
-.tracker-organizer-btn {
-  background: #ffffff;
-  border: 0.13rem solid #d1d5db;
-  border-radius: 1.1rem;
-  padding: 0.7rem 1.6rem;
-  color: #1f2937;
-  font-size: 1.3rem;
-  font-weight: 700;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.tracker-organizer-btn:hover {
-  background: #f9fafb;
-  border-color: #9ca3af;
-  transform: translateY(-0.1rem);
-}
 
 .tracker-btn-icon {
   font-size: 1.6rem;
@@ -843,8 +822,7 @@
     align-items: stretch;
   }
   .tracker-timeline-pill-btn,
-  .tracker-cancel-btn,
-  .tracker-organizer-btn {
+  .tracker-cancel-btn {
     justify-content: center;
     width: 100%;
   }

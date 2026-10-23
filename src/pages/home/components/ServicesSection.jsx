@@ -9,9 +9,7 @@ import {
   LuBuilding2,
   LuRecycle,
   LuSparkles,
-  LuTruck,
 } from "react-icons/lu";
-import SectionHeaderBadge from "../../../common/SectionBadge/SectionHeaderBadge";
 import CustomDropdown from "../../../common/dropdown/CustomDropdown";
 import CustomDatePicker from "../../../common/Calendar/CustomDatePicker";
 import "../style/ServicesSection.css";
@@ -46,7 +44,6 @@ export default function ServicesSection({ servicesBooking }) {
     <section id="services" className="services-section">
       <div className="section-wrapper">
         <div className="section-header">
-          <SectionHeaderBadge icon={<LuTruck />} />
           <span className="section-tag">Our Services</span>
           <h2 className="section-title">
             Tailored Waste Solutions for Homes & Businesses
@@ -228,8 +225,11 @@ export default function ServicesSection({ servicesBooking }) {
 
         {/* Waste Classification / Can I Recycle This? Widget */}
         <div className="checker-box">
-          <SectionHeaderBadge icon={<LuSparkles />} />
           <span className="section-tag">
+            <LuSparkles
+              style={{ verticalAlign: "-0.2rem", marginRight: "0.6rem" }}
+              aria-hidden="true"
+            />
             Instant Segregation Guide
           </span>
           <h2 className="section-title">Can I Recycle This?</h2>

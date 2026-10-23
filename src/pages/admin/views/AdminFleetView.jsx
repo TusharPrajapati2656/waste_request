@@ -1,6 +1,7 @@
 // src/pages/admin/views/AdminFleetView.jsx
 
 import { useState } from "react";
+import CustomDropdown from "../../../common/dropdown/CustomDropdown";
 import {
   LuTruck,
   LuPlus,
@@ -11,7 +12,35 @@ import {
   LuCircleCheck,
   LuMapPin,
   LuPhone,
+  LuLeaf,
+  LuListChecks,
+  LuZap,
+  LuChevronRight,
 } from "react-icons/lu";
+
+const STATUS_FILTER_OPTIONS = [
+  { value: "all", label: "All Duty Statuses" },
+  { value: "Available", label: "Available" },
+  { value: "En Route", label: "En Route" },
+  { value: "On Break", label: "On Break" },
+  { value: "Off Duty", label: "Off Duty" },
+];
+
+const ZONE_FILTER_OPTIONS = [
+  { value: "all", label: "All Operational Zones" },
+  { value: "Sector 14 Central", label: "Sector 14 Central" },
+  { value: "Sector 22 North", label: "Sector 22 North" },
+  { value: "Sector 18 Cyber Hub", label: "Sector 18 Cyber Hub" },
+  { value: "Sector 9 South", label: "Sector 9 South" },
+  { value: "Industrial Area East", label: "Industrial Area East" },
+];
+
+const DRIVER_STATUS_OPTIONS = [
+  { value: "Available", label: "Available" },
+  { value: "En Route", label: "En Route" },
+  { value: "On Break", label: "On Break" },
+  { value: "Off Duty", label: "Off Duty" },
+];
 
 export default function AdminFleetView({
   drivers = [],
@@ -117,7 +146,12 @@ export default function AdminFleetView({
       {/* Filters Bar */}
       <div
         className="admin-card-container"
-        style={{ padding: "1.6rem 2.4rem" }}
+        style={{
+          padding: "1.6rem 2.4rem",
+          overflow: "visible",
+          position: "relative",
+          zIndex: 50,
+        }}
       >
         <div
           style={{
@@ -132,186 +166,242 @@ export default function AdminFleetView({
           >
             Filter Drivers:
           </span>
-          <select
-            className="admin-filter-select"
-            value={filterStatus}
-            onChange={(e) => setFilterStatus(e.target.value)}
-          >
-            <option value="all">All Duty Statuses</option>
-            <option value="Available">Available</option>
-            <option value="En Route">En Route</option>
-            <option value="On Break">On Break</option>
-            <option value="Off Duty">Off Duty</option>
-          </select>
+          <div style={{ minWidth: "18rem" }}>
+            <CustomDropdown
+              options={STATUS_FILTER_OPTIONS}
+              value={filterStatus}
+              onChange={(e) => setFilterStatus(e.target.value)}
+              variant="filter"
+              ariaLabel="Filter by Duty Status"
+            />
+          </div>
 
-          <select
-            className="admin-filter-select"
-            value={filterZone}
-            onChange={(e) => setFilterZone(e.target.value)}
-          >
-            <option value="all">All Operational Zones</option>
-            <option value="Sector 14 Central">Sector 14 Central</option>
-            <option value="Sector 22 North">Sector 22 North</option>
-            <option value="Sector 18 Cyber Hub">Sector 18 Cyber Hub</option>
-            <option value="Sector 9 South">Sector 9 South</option>
-            <option value="Industrial Area East">Industrial Area East</option>
-          </select>
+          <div style={{ minWidth: "22rem" }}>
+            <CustomDropdown
+              options={ZONE_FILTER_OPTIONS}
+              value={filterZone}
+              onChange={(e) => setFilterZone(e.target.value)}
+              variant="filter"
+              ariaLabel="Filter by Operational Zone"
+            />
+          </div>
         </div>
       </div>
 
       {/* Fleet Cards Grid */}
       <div className="admin-fleet-grid">
         {filteredDrivers.map((driver) => {
-          const statusColors = {
-            Available: { bg: "#ecfdf5", color: "#059669" },
-            "En Route": { bg: "#eff6ff", color: "#1d4ed8" },
-            "On Break": { bg: "#fffbeb", color: "#d97706" },
-            "Off Duty": { bg: "#f1f5f9", color: "#475569" },
+          const statusClassMap = {
+            Available: "available",
+            "En Route": "en-route",
+            "On Break": "on-break",
+            "Off Duty": "off-duty",
           };
-          const cfg = statusColors[driver.status] || {
-            bg: "#f1f5f9",
-            color: "#475569",
-          };
+          const statusClass = statusClassMap[driver.status] || "available";
+
+          const totalPickups = Number(driver.todayPickups) || 6;
+          const completedPickups = Number(driver.completedPickups) || 4;
+          const percent = Math.min(
+            100,
+            Math.round((completedPickups / totalPickups) * 100)
+          );
+          const donutRadius = 11;
+          const donutCircum = 2 * Math.PI * donutRadius;
+          const donutOffset = donutCircum * (1 - percent / 100);
+
+          const batteryLevel = driver.batteryLevel ?? 78;
 
           return (
             <div key={driver.id} className="admin-driver-card">
-              {/* Top row */}
+              {/* Top Row: Avatar, Name & Location, Status Pill */}
               <div className="admin-driver-top">
-                <div
-                  className="admin-driver-avatar"
-                  style={{ background: driver.avatarColor }}
-                >
-                  {driver.name
-                    .split(" ")
-                    .map((n) => n[0])
-                    .join("")}
+                <div className="admin-driver-top-left">
+                  <div
+                    className="admin-driver-avatar"
+                    style={{ background: driver.avatarColor || "#0e834d" }}
+                  >
+                    {driver.name
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")}
+                  </div>
+                  <div className="admin-driver-info">
+                    <h3 className="admin-driver-name">{driver.name}</h3>
+                    <span className="admin-driver-zone">
+                      <LuMapPin className="admin-driver-zone-icon" />
+                      {driver.zone}
+                    </span>
+                  </div>
                 </div>
-                <div className="admin-driver-info">
-                  <h3 className="admin-driver-name">{driver.name}</h3>
-                  <span className="admin-driver-zone">
-                    <LuMapPin style={{ marginRight: "0.4rem" }} />
-                    {driver.zone}
-                  </span>
+
+                <div className={`admin-driver-status-pill ${statusClass}`}>
+                  <span className="admin-driver-status-dot" aria-hidden="true" />
+                  <span>{driver.status}</span>
+                  <LuChevronRight style={{ fontSize: "1.4rem", strokeWidth: 2.5 }} />
                 </div>
-                <span
-                  className="admin-driver-status-badge"
-                  style={{ background: cfg.bg, color: cfg.color }}
-                >
-                  {driver.status}
-                </span>
               </div>
 
-              {/* Details List */}
-              <div className="admin-driver-details-list">
-                <div className="admin-driver-detail-row">
-                  <span className="admin-driver-detail-label">
-                    Assigned Vehicle
-                  </span>
-                  <span className="admin-driver-detail-val">
-                    {driver.vehicleReg}
-                  </span>
-                </div>
-                <div className="admin-driver-detail-row">
-                  <span className="admin-driver-detail-label">
-                    Vehicle Type
-                  </span>
-                  <span
-                    className="admin-driver-detail-val"
-                    style={{ fontSize: "1.2rem" }}
-                  >
-                    {driver.vehicleType}
-                  </span>
-                </div>
-                <div className="admin-driver-detail-row">
-                  <span className="admin-driver-detail-label">
-                    Phone Hotline
-                  </span>
-                  <span className="admin-driver-detail-val">
-                    <LuPhone
-                      style={{ marginRight: "0.4rem", color: "#10b981" }}
-                    />
-                    {driver.phone}
-                  </span>
-                </div>
-                <div className="admin-driver-detail-row">
-                  <span className="admin-driver-detail-label">
-                    Today's Pickups
-                  </span>
-                  <span className="admin-driver-detail-val">
-                    {driver.completedPickups} / {driver.todayPickups} Completed
-                  </span>
-                </div>
-                <div style={{ marginTop: "0.6rem" }}>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      fontSize: "1.15rem",
-                    }}
-                  >
-                    <span style={{ color: "#64748b" }}>EV Battery Level</span>
-                    <strong
-                      style={{
-                        color: driver.batteryLevel > 30 ? "#059669" : "#dc2626",
-                      }}
-                    >
-                      {driver.batteryLevel}%
+              {/* Middle Row 1: 3 Mini-Cards (Assigned Vehicle, Vehicle Type, Phone Hotline) */}
+              <div className="admin-driver-metrics-row-1">
+                <div className="admin-driver-metric-box mint">
+                  <div className="admin-driver-metric-icon truck">
+                    <LuTruck />
+                  </div>
+                  <div className="admin-driver-metric-text">
+                    <span className="admin-driver-metric-label">
+                      ASSIGNED VEHICLE
+                    </span>
+                    <strong className="admin-driver-metric-val">
+                      {driver.vehicleReg || "EV Van #12 - DL 1V 4021"}
                     </strong>
                   </div>
-                  <div className="admin-battery-bar">
-                    <div
-                      className="admin-battery-fill"
-                      style={{
-                        width: `${driver.batteryLevel}%`,
-                        backgroundColor:
-                          driver.batteryLevel > 30 ? "#10b981" : "#ef4444",
-                      }}
-                    />
+                </div>
+
+                <div className="admin-driver-metric-box blue">
+                  <div className="admin-driver-metric-icon leaf">
+                    <LuLeaf />
+                  </div>
+                  <div className="admin-driver-metric-text">
+                    <span className="admin-driver-metric-label">
+                      VEHICLE TYPE
+                    </span>
+                    <strong className="admin-driver-metric-val">
+                      {driver.vehicleType || "Electric Van"}
+                    </strong>
+                  </div>
+                </div>
+
+                <div className="admin-driver-metric-box mint">
+                  <div className="admin-driver-metric-icon phone">
+                    <LuPhone />
+                  </div>
+                  <div className="admin-driver-metric-text">
+                    <span className="admin-driver-metric-label">
+                      PHONE HOTLINE
+                    </span>
+                    <strong className="admin-driver-metric-val">
+                      {driver.phone || "+91 98111 22334"}
+                    </strong>
+                  </div>
+                </div>
+              </div>
+
+              {/* Middle Row 2: 2 Mini-Cards (Today's Pickups & EV Battery Level) */}
+              <div className="admin-driver-metrics-row-2">
+                {/* Pickups Mini-Card */}
+                <div className="admin-driver-pickups-card">
+                  <div className="admin-driver-pickups-left">
+                    <div className="admin-driver-pickups-icon">
+                      <LuListChecks />
+                    </div>
+                    <div className="admin-driver-pickups-val-group">
+                      <span className="admin-driver-pickups-label">
+                        TODAY'S PICKUPS
+                      </span>
+                      <strong className="admin-driver-pickups-val">
+                        {completedPickups} / {totalPickups}{" "}
+                        <span className="admin-driver-pickups-sub">Done</span>
+                      </strong>
+                    </div>
+                  </div>
+
+                  <div className="admin-driver-donut-wrap">
+                    <svg
+                      width="28"
+                      height="28"
+                      viewBox="0 0 28 28"
+                      className="admin-driver-donut-svg"
+                    >
+                      <circle
+                        cx="14"
+                        cy="14"
+                        r={donutRadius}
+                        fill="none"
+                        stroke="#dcf2e5"
+                        strokeWidth="3.2"
+                      />
+                      <circle
+                        cx="14"
+                        cy="14"
+                        r={donutRadius}
+                        fill="none"
+                        stroke="#10b981"
+                        strokeWidth="3.2"
+                        strokeDasharray={donutCircum}
+                        strokeDashoffset={donutOffset}
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                    <span className="admin-driver-donut-pct">{percent}%</span>
+                  </div>
+                </div>
+
+                {/* Battery Mini-Card */}
+                <div className="admin-driver-battery-card">
+                  <div className="admin-driver-battery-icon">
+                    <LuZap />
+                  </div>
+                  <div className="admin-driver-battery-body">
+                    <span className="admin-driver-battery-label">
+                      EV BATTERY LEVEL
+                    </span>
+                    <div className="admin-driver-battery-bar-wrap">
+                      <div className="admin-driver-battery-track">
+                        <div
+                          className="admin-driver-battery-fill-bar"
+                          style={{
+                            width: `${batteryLevel}%`,
+                            background: batteryLevel > 30 ? "#10b981" : "#ef4444",
+                          }}
+                        />
+                      </div>
+                      <span
+                        className="admin-driver-battery-pct"
+                        style={{
+                          color: batteryLevel > 30 ? "#059669" : "#dc2626",
+                        }}
+                      >
+                        {batteryLevel}%
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* Card Footer Actions */}
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  paddingTop: "1rem",
-                  borderTop: "0.1rem solid var(--admin-border)",
-                }}
-              >
-                {/* Status Toggle Quick Selector */}
-                <select
-                  value={driver.status}
-                  onChange={(e) =>
-                    onUpdateDriverStatus(driver.id, e.target.value)
-                  }
-                  className="admin-form-select"
-                  style={{
-                    width: "auto",
-                    padding: "0.6rem 1rem",
-                    fontSize: "1.25rem",
-                  }}
-                >
-                  <option value="Available">Available</option>
-                  <option value="En Route">En Route</option>
-                  <option value="On Break">On Break</option>
-                  <option value="Off Duty">Off Duty</option>
-                </select>
+              <div className="admin-driver-footer">
+                {/* Status Toggle Quick Selector with Pin Icon */}
+                <div className="admin-driver-status-select-wrap">
+                  <CustomDropdown
+                    options={DRIVER_STATUS_OPTIONS}
+                    value={driver.status}
+                    onChange={(e) =>
+                      onUpdateDriverStatus(driver.id, e.target.value)
+                    }
+                    icon={
+                      <span className="admin-driver-dropdown-pin-icon" aria-hidden="true">
+                        <LuMapPin />
+                      </span>
+                    }
+                    size="sm"
+                    variant="filter"
+                    className="admin-driver-custom-dropdown"
+                    ariaLabel={`Duty status for ${driver.name}`}
+                  />
+                </div>
 
-                <div style={{ display: "flex", gap: "0.6rem" }}>
+                <div className="admin-driver-action-buttons">
                   <button
                     type="button"
-                    className="admin-icon-btn"
-                    title="Edit driver"
+                    className="admin-driver-action-btn edit"
+                    title="Edit driver profile"
                     onClick={() => onEditDriver(driver)}
                   >
                     <LuPencil />
                   </button>
                   <button
                     type="button"
-                    className="admin-icon-btn delete"
+                    className="admin-driver-action-btn delete"
                     title="Remove driver"
                     onClick={() => onDeleteDriver(driver.id)}
                   >

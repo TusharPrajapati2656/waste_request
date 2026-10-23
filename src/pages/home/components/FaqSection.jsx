@@ -1,14 +1,7 @@
 // src/pages/home/components/FaqSection.jsx
 
 import { FiSearch } from "react-icons/fi";
-import {
-  LuChevronDown,
-  LuChevronUp,
-  LuRecycle,
-  LuLeaf,
-  LuCircleHelp,
-} from "react-icons/lu";
-import SectionHeaderBadge from "../../../common/SectionBadge/SectionHeaderBadge";
+import { LuChevronDown, LuChevronUp, LuCircleHelp } from "react-icons/lu";
 import "../style/FaqSection.css";
 
 export default function FaqSection({ faq, onScrollTo }) {
@@ -42,10 +35,7 @@ export default function FaqSection({ faq, onScrollTo }) {
   return (
     <section id="faq" className="faq-section">
       <div className="faq-container">
-        {/* Top Centered 3D Glossy Icon Badge */}
         <div className="faq-header-center">
-          <SectionHeaderBadge icon={<LuCircleHelp />} />
-
           <span className="section-tag">Knowledge Base & FAQ</span>
 
           <h2 className="faq-title">Frequently Asked Questions</h2>

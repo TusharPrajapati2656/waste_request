@@ -10,7 +10,6 @@ const DEFAULT_SETTINGS = {
   emergencyPhone: "+91 99999 00112",
   operatingHours: "07:30 AM - 07:00 PM (Mon - Sun)",
   autoAssignDrivers: true,
-  co2OffsetRatePerKg: 1.84, // kg CO2 avoided per kg waste recycled
   activeZones: [
     { id: "Z-14", name: "Sector 14 Central", pincodes: "110001, 110014", active: true },
     { id: "Z-22", name: "Sector 22 North", pincodes: "110022, 110025", active: true },

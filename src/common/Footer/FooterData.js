@@ -14,7 +14,6 @@ export const footerServices = [
   { label: "Recyclable Waste Sorting", path: "#services", id: "services" },
   { label: "Bulk Waste Pickup", path: "#services", id: "services" },
   { label: "Track Pickup Requests", path: "/my-requests" },
-  { label: "Organizer Dispatch Hub", path: "/organizer" },
 ];
 
 export const footerContact = {

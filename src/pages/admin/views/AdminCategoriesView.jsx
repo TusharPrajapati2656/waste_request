@@ -1,7 +1,41 @@
 // src/pages/admin/views/AdminCategoriesView.jsx
 
 import { useState } from "react";
-import { LuPencil, LuSave, LuX } from "react-icons/lu";
+import {
+  LuTrash2,
+  LuRecycle,
+  LuLeaf,
+  LuCpu,
+  LuArmchair,
+  LuFlame,
+  LuBuilding2,
+  LuCoins,
+  LuWeight,
+  LuTruck,
+  LuSettings,
+  LuArrowRight,
+  LuSave,
+  LuX,
+} from "react-icons/lu";
+
+function getCategoryIcon(id) {
+  switch (id) {
+    case "recyclables":
+      return <LuTrash2 />;
+    case "organic":
+      return <LuLeaf />;
+    case "ewaste":
+      return <LuCpu />;
+    case "bulk":
+      return <LuArmchair />;
+    case "hazardous":
+      return <LuFlame />;
+    case "commercial":
+      return <LuBuilding2 />;
+    default:
+      return <LuRecycle />;
+  }
+}
 
 export default function AdminCategoriesView({
   categories = [],
@@ -39,109 +73,139 @@ export default function AdminCategoriesView({
       </div>
 
       {/* Categories Cards Grid */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(34rem, 1fr))", gap: "2.4rem" }}>
+      <div className="admin-categories-grid">
         {categories.map((cat) => {
           const isCurrentEdit = editingId === cat.id;
 
           return (
-            <div
-              key={cat.id}
-              className="admin-card-container"
-              style={{
-                padding: "2.4rem",
-                display: "flex",
-                flexDirection: "column",
-                gap: "1.6rem",
-                borderTop: `0.4rem solid ${cat.color || "#10b981"}`,
-              }}
-            >
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-                <div>
-                  <h3 style={{ fontSize: "1.7rem", fontWeight: "800", color: "#0f172a", margin: "0 0 0.4rem" }}>
-                    {cat.name}
-                  </h3>
-                  <span
+            <div key={cat.id} className="admin-category-card">
+              {/* Card Header */}
+              <div className="admin-cat-card-header">
+                <div className="admin-cat-header-left">
+                  <div
+                    className="admin-cat-icon-box"
+                    aria-hidden="true"
                     style={{
-                      fontFamily: "monospace",
-                      fontSize: "1.2rem",
-                      color: "#64748b",
-                      background: "#f1f5f9",
-                      padding: "0.2rem 0.6rem",
-                      borderRadius: "0.4rem",
+                      background: cat.color ? `${cat.color}15` : "#eaf6ee",
+                      color: cat.color || "#16794b",
                     }}
                   >
-                    stream_id: {cat.id}
-                  </span>
+                    {getCategoryIcon(cat.id)}
+                  </div>
+                  <div className="admin-cat-title-group">
+                    <h2 className="admin-cat-title">{cat.name}</h2>
+                    <span className="admin-cat-stream-id">
+                      stream_id: {cat.id}
+                    </span>
+                  </div>
                 </div>
 
-                <span
-                  style={{
-                    padding: "0.35rem 0.9rem",
-                    borderRadius: "9999px",
-                    fontSize: "1.2rem",
-                    fontWeight: "700",
-                    background: cat.active ? "#ecfdf5" : "#fee2e2",
-                    color: cat.active ? "#059669" : "#dc2626",
-                  }}
+                <div
+                  className={`admin-cat-status-pill ${
+                    cat.active ? "active" : "disabled"
+                  }`}
                 >
-                  {cat.active ? "Active Stream" : "Disabled"}
-                </span>
+                  <span className="admin-cat-status-dot" aria-hidden="true" />
+                  <span>{cat.active ? "Active Stream" : "Disabled"}</span>
+                </div>
               </div>
 
               {isCurrentEdit ? (
-                <div style={{ display: "flex", flexDirection: "column", gap: "1.2rem" }}>
-                  <div className="admin-form-group">
-                    <label className="admin-form-label">Reward Credits / kg</label>
-                    <input
-                      type="number"
-                      step="0.5"
-                      className="admin-form-input"
-                      value={editForm.creditRewardPerKg}
-                      onChange={(e) =>
-                        setEditForm({ ...editForm, creditRewardPerKg: parseFloat(e.target.value) || 0 })
-                      }
-                    />
+                /* Edit Mode Drawer */
+                <div className="admin-cat-edit-panel">
+                  <div className="admin-form-grid-2">
+                    <div className="admin-form-group">
+                      <label className="admin-form-label">
+                        Citizen Reward (₹ / kg)
+                      </label>
+                      <input
+                        type="number"
+                        step="0.5"
+                        min="0"
+                        className="admin-form-input"
+                        value={editForm.creditRewardPerKg}
+                        onChange={(e) =>
+                          setEditForm({
+                            ...editForm,
+                            creditRewardPerKg: parseFloat(e.target.value) || 0,
+                          })
+                        }
+                      />
+                    </div>
+
+                    <div className="admin-form-group">
+                      <label className="admin-form-label">
+                        Min Threshold (kg)
+                      </label>
+                      <input
+                        type="number"
+                        min="1"
+                        className="admin-form-input"
+                        value={editForm.minWeightKg}
+                        onChange={(e) =>
+                          setEditForm({
+                            ...editForm,
+                            minWeightKg: parseInt(e.target.value, 10) || 1,
+                          })
+                        }
+                      />
+                    </div>
                   </div>
 
                   <div className="admin-form-group">
-                    <label className="admin-form-label">Min Weight (kg)</label>
-                    <input
-                      type="number"
-                      className="admin-form-input"
-                      value={editForm.minWeightKg}
-                      onChange={(e) =>
-                        setEditForm({ ...editForm, minWeightKg: parseInt(e.target.value, 10) || 1 })
-                      }
-                    />
-                  </div>
-
-                  <div className="admin-form-group">
-                    <label className="admin-form-label">Vehicle Requirement</label>
+                    <label className="admin-form-label">
+                      Required Vehicle Specification
+                    </label>
                     <input
                       type="text"
                       className="admin-form-input"
                       value={editForm.vehicleRequired}
                       onChange={(e) =>
-                        setEditForm({ ...editForm, vehicleRequired: e.target.value })
+                        setEditForm({
+                          ...editForm,
+                          vehicleRequired: e.target.value,
+                        })
                       }
+                      placeholder="e.g. Electric Van, Heavy Flatbed Truck"
                     />
                   </div>
 
-                  <div style={{ display: "flex", alignItems: "center", gap: "0.8rem", marginTop: "0.4rem" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "1rem",
+                      padding: "0.4rem 0",
+                    }}
+                  >
                     <input
                       type="checkbox"
-                      id={`active-${cat.id}`}
+                      id={`active-toggle-${cat.id}`}
                       checked={editForm.active}
                       onChange={(e) =>
                         setEditForm({ ...editForm, active: e.target.checked })
                       }
+                      style={{
+                        width: "1.8rem",
+                        height: "1.8rem",
+                        accentColor: "var(--primary)",
+                        cursor: "pointer",
+                      }}
                     />
-                    <label htmlFor={`active-${cat.id}`} style={{ fontSize: "1.3rem", fontWeight: "600" }}>
+                    <label
+                      htmlFor={`active-toggle-${cat.id}`}
+                      style={{
+                        fontSize: "1.35rem",
+                        fontWeight: "600",
+                        color: "#0f172a",
+                        cursor: "pointer",
+                      }}
+                    >
                       Active for citizen bookings
                     </label>
                   </div>
 
-                  <div style={{ display: "flex", gap: "0.8rem", marginTop: "0.8rem" }}>
+                  <div style={{ display: "flex", gap: "1rem", marginTop: "0.6rem" }}>
                     <button
                       type="button"
                       className="admin-btn admin-btn-primary"
@@ -149,58 +213,82 @@ export default function AdminCategoriesView({
                       onClick={() => handleSave(cat.id)}
                     >
                       <LuSave />
-                      <span>Save Rates</span>
+                      <span>Save Changes</span>
                     </button>
                     <button
                       type="button"
                       className="admin-btn admin-btn-secondary"
                       onClick={() => setEditingId(null)}
+                      title="Cancel edit"
                     >
                       <LuX />
+                      <span>Cancel</span>
                     </button>
                   </div>
                 </div>
               ) : (
+                /* Display Mode matching requested UI */
                 <>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "1rem",
-                      background: "#f8fafc",
-                      padding: "1.4rem",
-                      borderRadius: "var(--admin-radius-md)",
-                      fontSize: "1.3rem",
-                    }}
-                  >
-                    <div style={{ display: "flex", justifyContent: "space-between" }}>
-                      <span style={{ color: "#64748b" }}>Citizen Reward Credit:</span>
-                      <strong style={{ color: "#0f172a" }}>
-                        ₹ {cat.creditRewardPerKg.toFixed(2)} / kg
+                  {/* 3-Column Metrics Panel */}
+                  <div className="admin-cat-metrics-panel">
+                    {/* Col 1: Citizen Reward */}
+                    <div className="admin-cat-metric-col">
+                      <div className="admin-cat-metric-icon-wrap" aria-hidden="true">
+                        <LuCoins />
+                      </div>
+                      <span className="admin-cat-metric-label">
+                        Citizen Reward
+                      </span>
+                      <strong className="admin-cat-metric-value">
+                        ₹ {Number(cat.creditRewardPerKg).toFixed(2)} / kg
                       </strong>
                     </div>
 
-                    <div style={{ display: "flex", justifyContent: "space-between" }}>
-                      <span style={{ color: "#64748b" }}>Minimum Threshold:</span>
-                      <strong style={{ color: "#0f172a" }}>{cat.minWeightKg} kg</strong>
+                    {/* Col 2: Minimum Threshold */}
+                    <div className="admin-cat-metric-col">
+                      <div className="admin-cat-metric-icon-wrap" aria-hidden="true">
+                        <LuWeight />
+                      </div>
+                      <span className="admin-cat-metric-label">
+                        Minimum Threshold
+                      </span>
+                      <strong className="admin-cat-metric-value">
+                        {cat.minWeightKg} kg
+                      </strong>
                     </div>
 
-                    <div style={{ display: "flex", justifyContent: "space-between" }}>
-                      <span style={{ color: "#64748b" }}>Required Vehicle:</span>
-                      <strong style={{ color: "#0f172a", fontSize: "1.2rem" }}>
+                    {/* Col 3: Required Vehicle */}
+                    <div className="admin-cat-metric-col">
+                      <div className="admin-cat-metric-icon-wrap" aria-hidden="true">
+                        <LuTruck />
+                      </div>
+                      <span className="admin-cat-metric-label">
+                        Required Vehicle
+                      </span>
+                      <strong
+                        className="admin-cat-metric-value vehicle-text"
+                        title={cat.vehicleRequired}
+                      >
                         {cat.vehicleRequired}
                       </strong>
                     </div>
                   </div>
 
+                  {/* Action Button */}
                   <button
                     type="button"
-                    className="admin-btn admin-btn-secondary"
-                    style={{ justifyContent: "center", marginTop: "auto" }}
+                    className="admin-cat-config-btn"
                     onClick={() => startEdit(cat)}
                   >
-                    <LuPencil />
+                    <LuSettings
+                      className="admin-cat-btn-gear"
+                      aria-hidden="true"
+                    />
                     <span>Configure Pricing & Vehicle</span>
+                    <LuArrowRight
+                      className="admin-cat-btn-arrow"
+                      aria-hidden="true"
+                    />
                   </button>
                 </>
               )}

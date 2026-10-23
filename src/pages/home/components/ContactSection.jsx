@@ -6,21 +6,15 @@ import {
   LuPhone,
   LuMail,
   LuMapPin,
-  LuChevronRight,
   LuUser,
   LuFileText,
   LuMessageSquare,
   LuSend,
   LuShieldCheck,
-  LuClock,
-  LuRecycle,
-  LuHeadphones,
 } from "react-icons/lu";
-import SectionHeaderBadge from "../../../common/SectionBadge/SectionHeaderBadge";
 import { footerContact } from "../../../common/Footer/FooterData";
 import CustomDropdown from "../../../common/dropdown/CustomDropdown";
 import contactHeadset from "../../../assets/image/contact_headset.png";
-import contactMap from "../../../assets/image/contact_map.png";
 import contactLeaves from "../../../assets/image/contact_leaves.png";
 import "../style/ContactSection.css";
 
@@ -45,9 +39,8 @@ export default function ContactSection({ contact }) {
   return (
     <section id="contact" className="contact-section">
       <div className="contact-container">
-        {/* Top Section Header with Heading and Label */}
+        {/* Top Section Header */}
         <div className="section-header">
-          <SectionHeaderBadge icon={<LuHeadphones />} />
           <span className="section-tag">Get in Touch</span>
           <h2 className="section-title">
             We're Here to Help Keep Cities Clean
@@ -60,10 +53,10 @@ export default function ContactSection({ contact }) {
 
         <div className="contact-dual-grid">
           {/* ========================================================
-              LEFT CARD: Contact Details, Map & 24/7 Hotline
+              LEFT CARD: Contact Details & Emergency Support
              ======================================================== */}
           <div className="contact-card-main contact-info-card">
-            {/* Header with Title and 3D Headset Illustration */}
+            {/* Header with Title and 3D Headset Illustration (Preserved) */}
             <div className="contact-card-header">
               <div className="contact-card-header-left">
                 <div className="contact-card-tag">
@@ -72,8 +65,7 @@ export default function ContactSection({ contact }) {
                 </div>
                 <h2 className="contact-main-title">We're Here to Help</h2>
                 <p className="contact-main-desc">
-                  Have a question, need support, or want to partner with us? Our
-                  team is just a message away.
+                  Support for pickups, partnerships, and general enquiries.
                 </p>
               </div>
 
@@ -86,63 +78,57 @@ export default function ContactSection({ contact }) {
               </div>
             </div>
 
-            {/* Row 1: Two Quick Contact Channels Side-by-Side */}
-            <div className="contact-channels-grid">
-              {/* Phone & Dispatch */}
-              <div className="contact-channel-card">
-                <div className="channel-icon-wrap" aria-hidden="true">
+            {/* Stack of 4 Contact Row Cards */}
+            <div className="contact-items-stack">
+              {/* Item 1: Phone & Dispatch */}
+              <div className="contact-row-card">
+                <div className="contact-circle-icon" aria-hidden="true">
                   <LuPhone />
                 </div>
-                <div className="channel-info">
-                  <div className="channel-top">
-                    <h4>Phone & Dispatch</h4>
-                    <span className="channel-badge">Mon - Sat</span>
-                  </div>
+                <div className="contact-row-content">
+                  <h4 className="contact-row-title">Phone & Dispatch</h4>
                   <a
                     href={`tel:${footerContact.phone.replace(/[^\d+]/g, "")}`}
-                    className="channel-link"
+                    className="contact-row-val"
                   >
                     {footerContact.phone}
                   </a>
-                  <span className="channel-meta">7:00 AM - 8:00 PM</span>
+                  <span className="contact-row-subtext">
+                    Mon - Sat · 7:00 AM - 8:00 PM
+                  </span>
                 </div>
               </div>
 
-              {/* Email Support */}
-              <div className="contact-channel-card">
-                <div className="channel-icon-wrap" aria-hidden="true">
+              {/* Item 2: Email Support */}
+              <div className="contact-row-card">
+                <div className="contact-circle-icon" aria-hidden="true">
                   <LuMail />
                 </div>
-                <div className="channel-info">
-                  <div className="channel-top">
-                    <h4>Email Support</h4>
-                    <span className="channel-badge">&lt; 15m reply</span>
-                  </div>
+                <div className="contact-row-content">
+                  <h4 className="contact-row-title">Email Support</h4>
                   <a
                     href={`mailto:${footerContact.email}`}
-                    className="channel-link"
-                    title={footerContact.email}
+                    className="contact-row-val"
                   >
                     {footerContact.email}
                   </a>
-                  <span className="channel-meta">Online ticketing 24/7</span>
+                  <span className="contact-row-subtext">
+                    Typical reply under 15 minutes
+                  </span>
                 </div>
               </div>
-            </div>
 
-            {/* Row 2: Central Recovery & Depot Hub with Visual Map & Facility Timings */}
-            <div className="contact-depot-hub-card">
-              <div className="depot-header">
-                <div
-                  className="channel-icon-wrap depot-icon-wrap"
-                  aria-hidden="true"
-                >
+              {/* Item 3: Central Recovery & Depot Hub */}
+              <div className="contact-row-card">
+                <div className="contact-circle-icon" aria-hidden="true">
                   <LuMapPin />
                 </div>
-                <div className="depot-header-info">
-                  <div className="depot-title-row">
-                    <h4>Central Recovery & Depot Hub</h4>
-                    <span className="depot-badge">
+                <div className="contact-row-content">
+                  <div className="contact-row-title-row">
+                    <h4 className="contact-row-title">
+                      Central Recovery & Depot Hub
+                    </h4>
+                    <span className="depot-welcome-badge">
                       <FiTruck
                         className="depot-badge-icon"
                         aria-hidden="true"
@@ -150,53 +136,29 @@ export default function ContactSection({ contact }) {
                       <span>Drop-offs Welcome</span>
                     </span>
                   </div>
-                  <span className="depot-address">{footerContact.address}</span>
-                  <span className="depot-type">
-                    Waste Segregation & Materials Transfer Station
+                  <span className="contact-row-subtext">
+                    {footerContact.address}
                   </span>
                 </div>
               </div>
 
-              {/* Sub-grid: Map Visual & Timings */}
-              <div className="depot-details-row">
-                <div className="depot-map-box">
-                  <img
-                    src={contactMap}
-                    alt="GreenCycle Eco-Park Location Map"
-                    className="depot-map-img"
-                  />
+              {/* Item 4: Emergency Alert Card */}
+              <div className="contact-emergency-card">
+                <div className="emergency-square-icon" aria-hidden="true">
+                  <FiAlertTriangle />
                 </div>
-
-                <div className="depot-timings-box">
-                  <div className="timings-title">
-                    <LuClock className="timings-icon" aria-hidden="true" />
-                    <span>Facility Timings</span>
-                  </div>
-                  <div className="timings-content">
-                    <p className="timings-open">Mon - Sat: 7:00 AM - 8:00 PM</p>
-                    <p className="timings-closed">Sunday: Closed</p>
-                  </div>
-                  <div className="timings-deco-leaf" aria-hidden="true">
-                    <LuRecycle />
-                  </div>
+                <div className="emergency-content">
+                  <h5 className="emergency-headline">
+                    Hazardous spill or emergency?
+                  </h5>
+                  <p className="emergency-text">
+                    Call{" "}
+                    <strong className="emergency-highlight">
+                      1800-GREENCYCLE
+                    </strong>{" "}
+                    for 24/7 priority dispatch.
+                  </p>
                 </div>
-              </div>
-            </div>
-
-            {/* Row 3: Emergency / Hazardous Spill Alert Card */}
-            <div className="emergency-alert-card">
-              <div className="emergency-alert-icon" aria-hidden="true">
-                <FiAlertTriangle />
-              </div>
-              <div className="emergency-alert-content">
-                <h5>Emergency or Hazardous Spill?</h5>
-                <p>
-                  Call <strong>1800-GREENCYCLE</strong> for immediate 24/7
-                  priority dispatch.
-                </p>
-              </div>
-              <div className="emergency-arrow" aria-hidden="true">
-                <LuChevronRight />
               </div>
             </div>
           </div>

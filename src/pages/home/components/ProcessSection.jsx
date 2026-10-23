@@ -1,8 +1,7 @@
 // src/pages/home/components/ProcessSection.jsx
 
 import React from "react";
-import { LuChevronRight, LuRoute } from "react-icons/lu";
-import SectionHeaderBadge from "../../../common/SectionBadge/SectionHeaderBadge";
+import { LuChevronRight } from "react-icons/lu";
 import { processSteps } from "../data/homeData";
 import processStep1 from "../../../assets/image/process_step_1.png";
 import processStep2 from "../../../assets/image/process_step_2.png";
@@ -20,7 +19,6 @@ export default function ProcessSection() {
 
       <div className="section-wrapper">
         <div className="section-header">
-          <SectionHeaderBadge icon={<LuRoute />} />
           <span className="section-tag">Simple Process</span>
           <h2 className="section-title">How GreenCycle Works in 3 Steps</h2>
           <p className="section-subtitle">

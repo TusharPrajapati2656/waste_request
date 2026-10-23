@@ -65,18 +65,17 @@
 /* Services Grid */
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 43rem), 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.4rem;
   text-align: left;
 }
 
 .service-card {
   width: 100%;
-  max-width: 43rem;
   background: #ffffff;
   border: 0.12rem solid #bbf7d0;
-  border-radius: 2.6rem;
-  padding: 3.4rem 3.2rem 3rem;
+  border-radius: 2.4rem;
+  padding: 3rem 2.6rem 2.6rem;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -103,8 +102,8 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 17rem;
-  height: 17rem;
+  width: 15rem;
+  height: 15rem;
   pointer-events: none;
   z-index: 0;
 }
@@ -119,7 +118,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 1.6rem;
+  gap: 1.4rem;
   position: relative;
   z-index: 1;
 }
@@ -127,19 +126,20 @@
 .service-card-header-left {
   display: flex;
   align-items: center;
-  gap: 1.8rem;
+  gap: 1.4rem;
   flex: 1;
+  min-width: 0;
 }
 
 .service-card-icon {
-  width: 5.6rem;
-  height: 5.6rem;
-  border-radius: 1.6rem;
+  width: 5.2rem;
+  height: 5.2rem;
+  border-radius: 1.4rem;
   background: #eaf7ee;
   color: #16794b;
   display: grid;
   place-items: center;
-  font-size: 2.8rem;
+  font-size: 2.6rem;
   flex-shrink: 0;
   border: 0.12rem solid #d1fae5;
 }
@@ -149,32 +149,39 @@
   flex-direction: column;
   line-height: 1.15;
   margin: 0;
+  min-width: 0;
 }
 
 .service-card-title .title-dark {
-  font-size: clamp(2.1rem, 2vw, 2.4rem);
+  font-size: clamp(1.8rem, 1.8vw, 2.1rem);
   font-weight: 800;
   color: #0f172a;
   letter-spacing: -0.025em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .service-card-title .title-green {
-  font-size: clamp(2.1rem, 2vw, 2.4rem);
+  font-size: clamp(1.8rem, 1.8vw, 2.1rem);
   font-weight: 800;
   color: #16794b;
   letter-spacing: -0.025em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .service-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.5rem;
   background: #eaf7ee;
   color: #16794b;
   border: 0.12rem solid #bbf7d0;
   border-radius: 9999px;
-  padding: 0.65rem 1.4rem;
-  font-size: 1.35rem;
+  padding: 0.55rem 1.2rem;
+  font-size: 1.25rem;
   font-weight: 700;
   white-space: nowrap;
   flex-shrink: 0;
@@ -182,17 +189,17 @@
 }
 
 .service-badge svg {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   color: #16794b;
 }
 
 /* Description */
 .service-card-desc {
-  font-size: 1.55rem;
+  font-size: 1.45rem;
   color: #4b5563;
   line-height: 1.5;
   font-weight: 500;
-  margin: 2.2rem 0 2.2rem;
+  margin: 1.8rem 0 2rem;
   position: relative;
   z-index: 1;
 }
@@ -201,7 +208,7 @@
 .service-features-list {
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
+  gap: 1.4rem;
   position: relative;
   z-index: 1;
 }
@@ -209,23 +216,23 @@
 .service-feature-row {
   display: flex;
   align-items: center;
-  gap: 1.6rem;
+  gap: 1.4rem;
 }
 
 .service-feature-circle {
-  width: 4.2rem;
-  height: 4.2rem;
+  width: 3.8rem;
+  height: 3.8rem;
   border-radius: 50%;
   background: #eaf7ee;
   color: #16794b;
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
 
 .service-feature-label {
-  font-size: 1.55rem;
+  font-size: 1.45rem;
   font-weight: 600;
   color: #0f172a;
   line-height: 1.35;
@@ -235,7 +242,7 @@
 .service-card-divider {
   height: 0.1rem;
   background: #eef2f0;
-  margin: 2.6rem 0 2.2rem;
+  margin: 2.2rem 0 1.8rem;
   position: relative;
   z-index: 1;
 }
@@ -245,7 +252,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1.6rem;
+  gap: 1.2rem;
   margin-top: auto;
   position: relative;
   z-index: 1;
@@ -254,12 +261,13 @@
 .service-price-block {
   display: flex;
   align-items: center;
-  gap: 1.4rem;
+  gap: 1.2rem;
+  min-width: 0;
 }
 
 .service-price-badge-circle {
-  width: 4.4rem;
-  height: 4.4rem;
+  width: 4rem;
+  height: 4rem;
   border-radius: 50%;
   background: #eaf7ee;
   color: #16794b;
@@ -271,43 +279,47 @@
 .service-price-texts {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.15rem;
+  min-width: 0;
 }
 
 .service-price-primary {
-  font-size: 1.65rem;
+  font-size: 1.55rem;
   font-weight: 800;
   color: #0f172a;
   line-height: 1.2;
   letter-spacing: -0.015em;
+  white-space: nowrap;
 }
 
 .service-price-secondary {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: #64748b;
   font-weight: 500;
   line-height: 1.2;
+  white-space: nowrap;
 }
 
 .btn-book-service {
-  padding: 1.2rem 2.2rem;
+  padding: 1.1rem 1.8rem;
   background: #16794b;
   color: #ffffff;
   border: none;
   border-radius: 1.2rem;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 700;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.6rem;
   box-shadow: 0 0.6rem 1.8rem -0.4rem rgba(22, 121, 75, 0.35);
   transition: all 0.2s ease;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .btn-book-service .btn-book-arrow {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   transition: transform 0.2s ease;
 }
 
@@ -321,9 +333,21 @@
   transform: translateX(0.35rem);
 }
 
-@media (max-width: 640px) {
+@media (max-width: 1040px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.2rem;
+  }
+}
+
+@media (max-width: 680px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+  }
+
   .service-card {
-    padding: 2.6rem 2.2rem 2.4rem;
+    padding: 2.4rem 2rem 2.2rem;
     border-radius: 2rem;
   }
 
@@ -347,7 +371,7 @@
   .service-card-footer {
     flex-direction: column;
     align-items: stretch;
-    gap: 1.8rem;
+    gap: 1.6rem;
   }
 
   .btn-book-service {

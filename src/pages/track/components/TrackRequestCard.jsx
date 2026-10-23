@@ -1,6 +1,5 @@
 // src/pages/track/components/TrackRequestCard.jsx
 
-import { Link } from "react-router-dom";
 import {
   LuFileText,
   LuClock,
@@ -14,8 +13,6 @@ import {
   LuPhone,
   LuChevronDown,
   LuChevronUp,
-  LuArrowRight,
-  LuEye,
   LuAward,
 } from "react-icons/lu";
 import { STATUS_MAP } from "../../../services/requestStore";
@@ -184,7 +181,7 @@ export default function TrackRequestCard({
           )}
         </button>
 
-        {/* Right: Cancel Request and Organizer View buttons */}
+        {/* Right: Cancel Request button */}
         <div className="tracker-actions-right">
           {!["completed", "cancelled"].includes(req.status) && (
             <button
@@ -196,12 +193,6 @@ export default function TrackRequestCard({
               <span>Cancel Request</span>
             </button>
           )}
-
-          <Link to="/organizer" className="tracker-organizer-btn">
-            <LuEye className="tracker-btn-icon" aria-hidden="true" />
-            <span>Organizer View</span>
-            <LuArrowRight className="tracker-btn-arrow" aria-hidden="true" />
-          </Link>
         </div>
       </div>
 

@@ -1,8 +1,7 @@
 // src/pages/home/components/CategoriesSection.jsx
 
 import React from "react";
-import { LuArrowUpRight, LuSparkles, LuRecycle } from "react-icons/lu";
-import SectionHeaderBadge from "../../../common/SectionBadge/SectionHeaderBadge";
+import { LuArrowUpRight, LuSparkles } from "react-icons/lu";
 import { wasteCategories } from "../data/homeData";
 import "../style/CategoriesSection.css";
 
@@ -51,7 +50,6 @@ export default function CategoriesSection() {
     <section className="categories-section" id="categories">
       <div className="section-wrapper">
         <div className="section-header">
-          <SectionHeaderBadge icon={<LuRecycle />} />
           <div className="broadcast-live-badge">
             <span className="live-pulse-dot" aria-hidden="true" />
             <span>CONTINUOUS RECOVERY STREAM · WHAT WE COLLECT</span>

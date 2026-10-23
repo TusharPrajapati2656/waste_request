@@ -16,7 +16,7 @@
   z-index: 2;
 }
 
-/* Centered Header with 3D Glossy Icon */
+/* Centered Header */
 .faq-header-center {
   display: flex;
   flex-direction: column;
@@ -24,74 +24,6 @@
   text-align: center;
   max-width: 68rem;
   margin: 0 auto;
-}
-
-.faq-top-badge {
-  position: relative;
-  width: 8.8rem;
-  height: 8.8rem;
-  display: grid;
-  place-items: center;
-  margin-bottom: 2rem;
-}
-
-.faq-top-badge-box {
-  width: 7.4rem;
-  height: 7.4rem;
-  border-radius: 2.2rem;
-  background: linear-gradient(135deg, #ffffff 0%, #eafbf0 50%, #d4f7de 100%);
-  border: 0.15rem solid #bbf7d0;
-  box-shadow:
-    0 1.6rem 3.4rem -0.4rem rgba(22, 101, 52, 0.22),
-    inset 0 0.3rem 0.6rem rgba(255, 255, 255, 0.9);
-  display: grid;
-  place-items: center;
-  color: #16a34a;
-  font-size: 3.8rem;
-  position: relative;
-  z-index: 2;
-  transition: transform 0.3s ease;
-}
-
-.faq-top-badge:hover .faq-top-badge-box {
-  transform: scale(1.05) rotate(-3deg);
-}
-
-.faq-badge-leaf {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-}
-
-.faq-badge-leaf.leaf-top-left {
-  top: -0.6rem;
-  left: -0.8rem;
-  font-size: 2.4rem;
-  color: #22c55e;
-  transform: rotate(-25deg);
-  filter: drop-shadow(0 0.4rem 0.8rem rgba(34, 197, 94, 0.3));
-  z-index: 1;
-}
-
-.faq-badge-leaf.leaf-top-right {
-  top: -0.8rem;
-  right: -1rem;
-  font-size: 2.6rem;
-  color: #16a34a;
-  transform: rotate(35deg);
-  filter: drop-shadow(0 0.4rem 0.8rem rgba(22, 121, 75, 0.3));
-  z-index: 1;
-}
-
-.faq-badge-leaf.leaf-bottom-right {
-  bottom: -0.4rem;
-  right: -0.6rem;
-  font-size: 2.2rem;
-  color: #15803d;
-  transform: rotate(70deg);
-  z-index: 3;
 }
 
 .faq-title {

@@ -23,13 +23,12 @@ export default function AdminTopbar({
   const [showProfileMenu, setShowProfileMenu] = useState(false);
 
   const tabTitles = {
-    overview: "Operations Overview & Telematics",
+    overview: "Operations Overview",
     requests: "Pickup Request Manifests",
     fleet: "Fleet & Driver Logistics",
-    analytics: "Diversion Analytics & Reports",
     categories: "Waste Categories & Pricing",
     audit: "System Audit Activity Trail",
-    settings: "Hub Configurations & Settings",
+    settings: "Hub Configurations",
   };
 
   const sampleNotifications = [

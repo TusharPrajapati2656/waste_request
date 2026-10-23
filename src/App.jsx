@@ -6,7 +6,6 @@ import Header from "./common/header/Header";
 import Footer from "./common/Footer/Footer";
 import Home from "./pages/home/Home";
 import TrackRequests from "./pages/track/TrackRequests";
-import OrganizerDashboard from "./pages/organizer/OrganizerDashboard";
 import AdminApp from "./pages/admin/AdminApp";
 import Legal from "./pages/Legal";
 
@@ -59,7 +58,7 @@ const App = () => {
           <Route path="/my-requests" element={<TrackRequests />} />
           <Route path="/track" element={<Navigate to="/my-requests" replace />} />
           <Route path="/track-requests" element={<Navigate to="/my-requests" replace />} />
-          <Route path="/organizer" element={<OrganizerDashboard />} />
+          <Route path="/organizer" element={<Navigate to="/admin" replace />} />
           <Route path="/privacy-policy" element={<Legal type="privacy" />} />
           <Route path="/terms" element={<Legal type="terms" />} />
           <Route path="*" element={<Navigate to="/" replace />} />

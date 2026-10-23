@@ -5,7 +5,6 @@ import {
   LuLayoutDashboard,
   LuClipboardList,
   LuTruck,
-  LuChartBar,
   LuLayers,
   LuHistory,
   LuSettings,
@@ -40,11 +39,6 @@ export default function AdminSidebar({
       label: "Fleet & Logistics",
       icon: <LuTruck className="admin-nav-icon" />,
       badge: activeDriversCount > 0 ? activeDriversCount : null,
-    },
-    {
-      id: "analytics",
-      label: "Analytics & Diverted CO2",
-      icon: <LuChartBar className="admin-nav-icon" />,
     },
     {
       id: "categories",

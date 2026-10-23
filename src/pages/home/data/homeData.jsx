@@ -352,26 +352,46 @@ export const pillars = [
   {
     icon: <LuRecycle />,
     title: "Circular Economy First",
+    titlePart1: "Circular Economy",
+    titlePart2: "First",
+    percentage: 94,
+    statLabel: "Materials",
+    statSubtext: "Reused & Remanufactured",
     description:
-      "Every scrap collected is treated as a resource. We redirect up to 94% of collected materials into remanufacturing pipelines.",
+      "Every scrap collected is treated as a resource and up to 94% of materials are redirected to remanufacturing pipelines.",
   },
   {
     icon: <LuLeaf />,
     title: "Zero-Landfill Commitment",
+    titlePart1: "Zero-Landfill",
+    titlePart2: "Commitment",
+    percentage: 100,
+    statLabel: "Diversion",
+    statSubtext: "From Municipal Dumps",
     description:
-      "Landfills emit dangerous methane and leachates. Our goal is to achieve zero unmanaged waste across participating regions.",
+      "Our zero unmanaged waste standard prevents dangerous methane emissions and protects local groundwater tables.",
   },
   {
     icon: <LuShieldCheck />,
     title: "Verified Traceability",
+    titlePart1: "Verified",
+    titlePart2: "Traceability",
+    percentage: 99,
+    statLabel: "Manifests",
+    statSubtext: "End-to-End Logged",
     description:
-      "From doorstep collection to recycling plants, waste batches are tracked via digital manifests so your footprint counts.",
+      "Digital manifests log every pickup from your doorstep through certified sorting hubs and green re-processors.",
   },
   {
     icon: <LuUsers />,
     title: "Community Dignity",
+    titlePart1: "Community",
+    titlePart2: "Dignity",
+    percentage: 100,
+    statLabel: "Fair Wages",
+    statSubtext: "Formalized Workers",
     description:
-      "We provide safe, formalized, and well-compensated employment to over 450+ sanitation workers and collection drivers.",
+      "Providing safe equipment, health insurance, and formalized living wages to 450+ sanitation workers.",
   },
 ];
 
